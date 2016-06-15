@@ -1,0 +1,29 @@
+/* CURRENTLY IN: styles/main.css */
+
+.container {
+	border: 1px solid black;
+	padding: 5px;
+	margin: 0 auto;
+	width: 500px;
+	height: auto;
+}
+.cell {
+	border: 5px solid white;
+	padding: 5px;
+	flex: 1;
+	height:100px;
+}
+.empty {
+	background-color: gray;
+}
+.row {
+
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.2 {
+	content: "2";
+	background-color: red;
+	color: white;
+}
