@@ -47,7 +47,7 @@ function getNeighbors (arr, i) {
 	return neighbors
 }
 
-//ignore zeros
+//ignore zeros//o(n)
 function getAverageDiffSansZeros (arr) {
 	let length = 0;
 	let sum = arr.reduce((a, b) => {	

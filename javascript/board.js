@@ -13,7 +13,7 @@ class board {
 		this.lastOrientation = "horizontal";
 		this.emptyspots = [[0,1,2,3],[0,1,2,3],[0,1,2,3],[0,1,2,3]];
 		this.gameOver = false; 
-		this.transposed 
+		this.transposed; 
 	}
 	//O(1) = add 2 or 4 to a random emptysquare w 0
 	fillRandomEmptySpace() {
@@ -27,7 +27,7 @@ class board {
 		}
 		else this.gameOver = true;
 	}
-	//(string, string) 
+	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
 	update (orientation, direction) {
 		//if direction is diff transpose
 		if (orientation !== this.lastOrientation) {
@@ -38,7 +38,7 @@ class board {
 		this.swipe(swipeFunc);//swipe
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
 		//updates gameOver if no empty spaces
-		this.fillRandomEmptySpace();//set a random zero space to 2 or 4(remove from empty spots)
+		// this.fillRandomEmptySpace();//set a random zero space to 2 or 4(remove from empty spots)
 	}
 	//(func)- compress each row based on direction
 	swipe (swipeInCurrDir) {
@@ -47,27 +47,31 @@ class board {
 			this.board[i] = swipeInCurrDir(this.board[i]);
 		}
 	}
-	actualScore () {//o(n)
+	//o(n)
+	actualScore () {
 		let all = getFlatArr(this.board);
 		return Math.max.apply( Math, all );
 	};
-
-	clusteredScore () {//o(n)
+	//o(n*n)
+	clusteredScore () {
 		let all = getFlatArr(this.board); 
 		let clusteredScore = all.reduce((a, b, i) => {//o(n)
-			let neighbors = utils.getNeighbors(all, b);//get neighbors
+			let neighbors = utils.getNeighbors(all, b);//get neighborso(o(1));
 			//estimate the sum of absolute differences from its neighbors (excluding the empty cells)
 			//we take the average difference.
-			let averageDiff = utils.getAverageDiffSansZeros(neighbors, i);
+			let averageDiff = utils.getAverageDiffSansZeros(neighbors, i);//o(n)
 			a += averageDiff //o(n)
-			return a
+			return a;
 		}, 0);		
-		console.log("cluster", clusteredScore);
 		return clusteredScore;
 	}
-
+	//o(n)
 	heuristicScore () {
-
+		let actualScore = this.actualScore();
+		let clusteredScore = this.clusteredScore();
+		let numberOfEmptyCells = getFlatArr(this.emptyspots).length;//o(n)
+		let score = (actualScore+Math.log(actualScore)*numberOfEmptyCells-clusteringScore);
+		return Math.Max(score, Math.min(actualScore, 1));
 	}
 }
 
