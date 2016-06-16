@@ -45,6 +45,19 @@ class board {
 			this.board[i] = swipeInCurrDir(this.board[i]);
 		}
 	}
+	actualScore () {
+		let all = this.board.reduce((a, b) =>{
+			a = a.concat(b);
+			return a;
+		}, []);
+		return Math.max.apply( Math, all );
+	}
+	clusteringScore () {
+
+	}
+	heuristicScore () {
+
+	}
 }
 
 module.exports = board;

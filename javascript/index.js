@@ -9,27 +9,34 @@ const gameBoard = new board();
 function start () {
 	// console.log(start)
 	gameBoard.fillRandomEmptySpace();
-	render(gameBoard.board);
+	render(gameBoard);
 }
 
 // //drawBoard 
-function render (board) {
+function render (gameBoard) {
+	let board = gameBoard.board;
+	let orientation = gameBoard.lastOrientation;
 	console.log(board)
-	for (let i = 0; i<4; i++) {
-		for (let j = 0; j<4; j++) { 
+	for (let row = 0; row<4; row++) {
+		for (let col = 0; col<4; col++) { 
+			let el = $('[data-cellid="'+row+"-"+col+'"]');
+			console.log("h", row, "v", col);
+			console.log("v", col,  "h", row);
 
-			let el = $('[data-cellid="'+i+"-"+j+'"]');
+			if (orientation === "horizontal") {
+				let el = $('[data-cellid="'+row+"-"+col+'"]');
+			}
+			else {
+				// let el = $('[data-cellid="'+col+"-"+row+'"]');
+			}
 
-			if (el.text() !== board[i][j]) {
-				if (board[i][j]) {
-				console.log(el.text(), board[i][j])
-				}
+			if (el.text() !== board[row][col]) {
 				el.empty();
-				if (board[i][j]) {
-					$(el).html('<div class="cell-num"><h1>'+board[i][j]+'</h1></div>')
+				if (board[row][col]) {
+					$(el).html('<div class="cell-num"><h1>'+board[row][col]+'</h1></div>')
 				}
 				else {
-					$(el).html('<div class="cell-num zero"><h1>'+board[i][j]+'</h1></div>')
+					$(el).html('<div class="cell-num zero"><h1>'+board[row][col]+'</h1></div>')
 				}
 			}
 			
@@ -54,6 +61,6 @@ $("body").keydown(e => {
 	else if(e.keyCode === 40) { //up
 		gameBoard.update ("vertical", "down");
 	}
-	render(gameBoard.board);
+	render(gameBoard);
 });
 	

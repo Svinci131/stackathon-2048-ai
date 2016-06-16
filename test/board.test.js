@@ -10,10 +10,25 @@ const board = require('../javascript/board.js');
 const swipe = board.swipe;
 const directions = require("../javascript/directions")
 const transpose = require('../javascript/utils').transpose
+const Board = new board();
 // console.log(blue(board))
 
+describe("actualScore", function (){
+	it ("has calcutlates the actualScore", function() {
+		Board.board = [[0,2,2,0],
+						[4,2,2,0],
+						[128,2,2,0],
+						[4,2048,8,4]];
+		let worseBoard = new board();
+		worseBoard.board = [[0,2,2,0],
+						[4,2,2,0],
+						[128,2,2,0],
+						[4,2,8,4]];
+		expect(Board.actualScore()).to.be.above(worseBoard.actualScore());
+	});
+});
 describe("swipe", function () {
-	const Board = new board();
+	
 
 	beforeEach(function() {		
 		Board.board = [[0,2,2,0],
