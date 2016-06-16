@@ -29,9 +29,9 @@ class board {
 	}
 	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
 	update (orientation, direction) {
+
 		//if direction is diff transpose
 		if (orientation !== this.lastOrientation) {
-			console.log("here")
 			this.board = transpose(this.board);
 		}
 		let swipeFunc = directions[orientation][direction];//define direction to swipe in 
@@ -39,6 +39,7 @@ class board {
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
 		//updates gameOver if no empty spaces
 		// this.fillRandomEmptySpace();//set a random zero space to 2 or 4(remove from empty spots)
+		console.log("here", this.board)
 	}
 	//(func)- compress each row based on direction
 	swipe (swipeInCurrDir) {

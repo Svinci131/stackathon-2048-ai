@@ -1,43 +1,55 @@
 'use strict'
+const Board = require("../board");
+const Node = require("./node");
 
-function createDelibrateState (board, orientation, direction) {
-	let temp = new Board () 
-	temp.board = board; 
+
+//(boardArr) => nodeobj
+function createDelibrateState (currNode, orientation, direction) {
+	let board = new Board (); 
+	board.board = currNode.board;
 	board.update(orientation, direction);
-	return this.board;
+	let node = new Node(board);
+	return node;
 }
 
-function createAllPossibleDelibrateStates(board) {
-	let right = createDelibrateState(board, "horizontal", "right");
-	let left = createDelibrateState(board, "horizontal", "left");
-	let up = createDelibrateState(board, "vertical", "up");
-	let down = createDelibrateState(board, "vertical", "down");
+
+//(BoardObj) => [nodeobj];
+function createAllPossibleDelibrateStates(currNode) {
+	let right = createDelibrateState(currNode, "horizontal", "right");
+	let left = createDelibrateState(currNode, "horizontal", "left");
+	let up = createDelibrateState(currNode, "vertical", "up");
+	let down = createDelibrateState(currNode, "vertical", "down");
 	return [right, left, up, down];
 }
 
 function createRandomState (board, rowIndex, colIndex, val) {
-	let temp = new Board () 
-	temp.board = board; 
-	temp.board[rowIndex][colIndex] = val;
-	return this.board;
+	let newBoard = new Board();
+	console.log(newBoard);
+	// 	newBoard.board = board; 
+	// let newnode = new node(newBoard);
+	// newnode.state[rowIndex][colIndex] = val;
+	newnode.state.emptyspots[randomRowIndex].splice(indexToUpdate, 1);
+	// return newnode;
 }
 
 function createAllPossibleRandomStates(board) {
 	let options = [2, 4];
 	let possibleStates = [];
 	for(let i = 0; i < 4; i++){
+
 		let possibleRow = board[i];
 		for(let j = 0; j < possibleRow.length; j++) {
+
 			for(let k = 0; k < 2; k++) {
-				let possibleState = createRandomState(i, j, options[k]);
+				let possibleState = createRandomState(board, i, j, options[k]);
 				possibleStates.push(possibleState);
 			}
 		}
 	}
-	return possibleState;
+	return possibleStates;
 }
 
-return {
+module.exports = {
 	createAllPossibleRandomStates: createAllPossibleRandomStates,
 	createRandomState: createRandomState,
 	createAllPossibleDelibrateStates: createAllPossibleDelibrateStates,

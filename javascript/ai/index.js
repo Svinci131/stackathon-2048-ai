@@ -1,10 +1,10 @@
 //Alpha-beta pruning
 'use strict'
 
-const createAllPossibleDelibrateStates  = require('./stateGeneration').createAllPossibleRandomStates;
-const createAllPossibleRandomStates = require('./stateGeneration').createAllPossibleDelibrateStates;
-
-
+const Board = require("../board");
+const createAllPossibleRandomStates  = require('./stateGeneration').createAllPossibleRandomStates;
+const createAllPossibleDelibrateStates = require('./stateGeneration').createAllPossibleDelibrateStates;
+const Node = require("./node");
 //The Minimax is a recursive algorithm which can be used for solving two-player zero-sum games
 //steps: 
 	//searches through the space of possible game states creating a tree
@@ -16,50 +16,52 @@ const createAllPossibleRandomStates = require('./stateGeneration').createAllPoss
 //http://blog.datumbox.com/using-artificial-intelligence-to-solve-the-2048-game-java-code/
 
 
-
-class leaf {
-	constructor (state, score) {
-		this.state = state//board
-		this.score = state.heuristicScore();
-		this.children = null;
-	}	
-}
 class tree {
 	constructor () {
-		let Board = new board ();
+		let board = new Board ();
 		//otherwise there is no worst move
-		Board.fillRandomEmptySpace();
-		this.head = new leaf (board, board.score);
+		board.fillRandomEmptySpace();
+		this.head = new Node (board);
 	}	
 	minimax (node, depth, maximizingPlayer) {
+		
 		if (depth === 0) {
 			return node.score;
 		}
 		if (maximizingPlayer) {  //ai
-			node.children = createAllPossibleDelibrateStates(node.state.board);
+		
+			node.children = createAllPossibleDelibrateStates(currNode);
 			let bestVal = -Infinity;
+			// console.log(depth, "p1", node);
 			node.children.forEach(child => {
-				let val = minmax(child, depth-1, FALSE); 
-				//select best value from new states
+				let val = this.minimax(child, depth-1, false); 
+				// //select best value from new states
 				bestVal = Math.max(bestVal, val);
-				return bestVal;
 			});
+			return bestVal;
 		}
 		
 		else { //normal comp
-			node.children = createAllPossibleRandomStates(node.state.board);
+			
+			node.children = createAllPossibleRandomStates(node.state);
+			let bestVal = Infinity;
+			// console.log(depth, "p2", node);
+
 			node.children.forEach(child => {
-				let val = minimax(child, depth - 1, TRUE);
+				let val = this.minimax(child, depth - 1, true);
 				//we want to assume the worst
-				let bestVal = Math.min(bestVal, val);
-				return bestVal; 
+				bestVal = Math.min(bestVal, val);			
 			});
+			return bestVal;
 		}
 	}
 }
 
-minmax(this.head, 2, TRUE);
 
+
+let Tree = new tree ();
+
+console.log(Tree.minimax(Tree.head, 2, true));
 
 
 
