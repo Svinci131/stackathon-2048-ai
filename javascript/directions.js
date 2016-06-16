@@ -2,8 +2,6 @@
 
 var swipe = require("./swipe");
 
-console.log("here", swipe);
-
 module.exports = {
 	horizontal: {
 		left: swipe.swipeLeft,
