@@ -45,6 +45,4 @@ class board {
 	}
 }
 
-module.exports = function () {
-	board;
-}
+module.exports = board;
