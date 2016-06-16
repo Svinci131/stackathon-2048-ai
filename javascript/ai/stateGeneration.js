@@ -4,9 +4,9 @@ const Node = require("./node");
 
 
 //(boardArr) => nodeobj
-function createDelibrateState (currNode, orientation, direction) {
+function createDelibrateState (currNodeBoardObj, orientation, direction) {
 	let board = new Board (); 
-	board.board = currNode.board;
+	board.board = currNodeBoardObj.board;
 	board.update(orientation, direction);
 	let node = new Node(board);
 	return node;
@@ -15,10 +15,10 @@ function createDelibrateState (currNode, orientation, direction) {
 
 //(BoardObj) => [nodeobj];
 function createAllPossibleDelibrateStates(currNode) {
-	let right = createDelibrateState(currNode, "horizontal", "right");
-	let left = createDelibrateState(currNode, "horizontal", "left");
-	let up = createDelibrateState(currNode, "vertical", "up");
-	let down = createDelibrateState(currNode, "vertical", "down");
+	let right = createDelibrateState(currNode.boardObj, "horizontal", "right");
+	let left = createDelibrateState(currNode.boardObj, "horizontal", "left");
+	let up = createDelibrateState(currNode.boardObj, "vertical", "up");
+	let down = createDelibrateState(currNode.boardObj, "vertical", "down");
 	return [right, left, up, down];
 }
 

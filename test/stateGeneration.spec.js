@@ -22,17 +22,15 @@ describe("createDelibrateState", function (){
 		expect(possibleDelibrateState).to.be.an.instanceof(Node);
 		expect(possibleDelibrateState.boardObj.board[0][3]).to.equal(4);
 	});
-	// it ("it creates four states", function() {
-	// 	expect(st)
-	// });
 });
 
 
 describe("createAllPossibleDelibrateStates", function (){
-	// createAllPossibleDelibrateStates(board) 
-	// it ("it creates four states", function() {
-	// 	expect()
-	// });
+	var possibleStates = stateGen.createAllPossibleDelibrateStates(node);
+	it ("it creates four new node", function() {
+		expect(possibleStates.length).to.equal(4);
+		expect(possibleStates[0]).to.be.an.instanceof(Node);
+	});
 });
 
 describe("createAllRandomDelibrateStates", function (){
