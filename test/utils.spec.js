@@ -28,6 +28,9 @@ describe('getAverageDiffSansZeros', function () {
 	it('it ignores undefined when they are there', function () {
 		expect(utils.getAverageDiffSansZeros([1,2,3, 0, undefined])).to.equal(2);
 	});
+	it('return zero is all undefined when they are there', function () {
+		expect(utils.getAverageDiffSansZeros([0,0,0, 0, undefined])).to.equal(0);
+	});
 	// it('it rounds', function () {
 	// });
 });

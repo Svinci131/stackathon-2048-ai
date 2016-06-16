@@ -58,9 +58,9 @@ class board {
 		let clusteredScore = all.reduce((a, b, i) => {//o(n)
 			let neighbors = utils.getNeighbors(all, b);//get neighbors
 			let averageDiff = utils.getAverageDiffSansZeros(neighbors, i);
-			// console.log(all, a, b, i)
-		
-			a += utils.getAverageDiffSansZeros(neighbors); //o(n)
+			
+			a += averageDiff //o(n)
+			// console.log(averageDiff)
 			return a
 		}, 0);		
 		console.log("cluster", clusteredScore);

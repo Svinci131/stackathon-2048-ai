@@ -49,15 +49,21 @@ function getNeighbors (arr, i) {
 
 //ignore zeros
 function getAverageDiffSansZeros (arr) {
-	var length = 0;
-	var sum = arr.reduce((a, b) => {
+	let length = 0;
+	let sum = arr.reduce((a, b) => {	
 		if (b) {
 			a += b;
 			length++;
 		}
 		return a
 	}, 0);
-	return sum/length;
+	
+	if (sum) {
+		return Math.floor(sum/length);
+	}
+	else {
+		return 0;
+	}
 }
 //(number) => arr- with length of num 
 //O(n)

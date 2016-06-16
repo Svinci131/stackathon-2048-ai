@@ -12,7 +12,11 @@ const directions = require("../javascript/directions")
 const transpose = require('../javascript/utils').transpose
 const Board = new board();
 // console.log(blue(board))
-
+describe("board", function (){
+	it ("has four arrays of four", function() {
+		expect(Board.board.length).to.equal(4);
+	});
+});
 describe("actualScore", function (){
 	it ("has calcutlates the actualScore", function() {
 		Board.board = [[0,2,2,0],
@@ -29,7 +33,7 @@ describe("actualScore", function (){
 });
 
 describe("clusteringScore", function (){
-	xit ("has gets lower score when the high tiles are close to eachother ", function() {
+	it ("has gets lower score when the high tiles are close to eachother ", function() {
 		Board.board = [[0,2,2,2048],
 						[4,2,2,0],
 						[128,2,2,0],
@@ -38,7 +42,7 @@ describe("clusteringScore", function (){
 		worseBoard.board = [[0,2,2,0],
 						[4,2,2,0],
 						[2048,256,128,0],
-						[,2,8,4]];
+						[0,2,8,4]];
 		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
 	});
 	// it ("has gets lower score when the high tiles are on sides or corners ", function() {
