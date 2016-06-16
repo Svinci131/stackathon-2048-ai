@@ -4,19 +4,35 @@ const chalk = require('chalk');
 const spies = require('chai-spies');
 const blue = chalk.blue;	
 const chai = require('chai');
-const sinon = require("sinon");
+// const sinon = require("sinon");
 const expect = require('chai').expect;
 const board = require('../javascript/board.js');
 const swipe = board.swipe;
-const directions = require("../javascript/directions")
-const transpose = require('../javascript/utils').transpose
+const directions = require("../javascript/directions");
+const transpose = require('../javascript/utils').transpose;
 const Board = new board();
+
+
 // console.log(blue(board))
 describe("board", function (){
 	it ("has four arrays of four", function() {
 		expect(Board.board.length).to.equal(4);
 	});
 });
+
+describe("heuristic score", function(){
+	Board.board = [ [0,0,0,0],
+						[0,0,0,0],
+						[0,0,0,0],
+						[2048,256,128,0]];
+		let worseBoard = new board();
+		worseBoard.board = [[0,2048,0,0],
+							[0,256,0,0],
+							[0,128,0,0],
+						    [0,0,0,0]];
+		expect(Board.heuristicScore()).to.be.above(worseBoard.heuristicScore());
+});
+
 describe("actualScore", function (){
 	it ("has calcutlates the actualScore", function() {
 		Board.board = [[0,2,2,0],
@@ -67,10 +83,10 @@ describe("clusteringScore", function (){
 							[0,256,0,0],
 							[0,128,0,0],
 						    [0,0,0,0]];
-
 		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
 	});
 });
+
 describe("swipe", function () {
 	beforeEach(function() {		
 		Board.board = [[0,2,2,0],

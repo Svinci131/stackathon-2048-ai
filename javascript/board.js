@@ -70,8 +70,8 @@ class board {
 		let actualScore = this.actualScore();
 		let clusteredScore = this.clusteredScore();
 		let numberOfEmptyCells = getFlatArr(this.emptyspots).length;//o(n)
-		let score = (actualScore+Math.log(actualScore)*numberOfEmptyCells-clusteringScore);
-		return Math.Max(score, Math.min(actualScore, 1));
+		let score = (actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore);
+		return Math.max(score, Math.min(actualScore, 1));
 	}
 }
 
