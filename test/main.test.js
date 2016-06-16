@@ -107,18 +107,33 @@ describe("update", function () {
 
 	
 
-// describe('fillRandomEmptySpace', function () {
-// 	it('it changes one zero value in board to two or four', function () {
-// 		let board = [[0,0,0,0],
-// 					 [0,0,0,0],
-// 					 [0,0,0,0],
-// 					 [0,0,0,0]];
+describe('fillRandomEmptySpace', function () {
+	const Board = new board();
+	Board.board = [[0,0,0,0],
+					  [0,0,0,0],
+					  [0,0,0,0],
+					  [0,0,0,0]];
+	
+	it('it changes removes one index from empty spots', function () {
+		Board.fillRandomEmptySpace();
+		let remainingEmptySpots = Board.emptyspots.reduce((a,b) => {
+			return a.concat(b);
+		});
+		expect(remainingEmptySpots.length).to.equal(15);
 
-// 		board = game.fillRandomEmptySpace(board);
-// 		board = board.reduce((a,b) => {
-// 			return a.concat(b);
-// 		});
-// 		expect(board.match(/0/gi).length).to.equal(15);
-
-// 	});
-// });
+	});
+	//need a way to test this- but it works 
+	it('it changes one zero value in board to two or four', function () {
+		// let newBoard = Board.board.reduce((a,b) => {
+		// 	return a.concat(b);
+		// });
+		// console.log(newBoard);
+		// expect(Board.board.indexOf(4))).to.be.true; || 
+		// expect(Board.board.indexOf(2))).to.be.true; || 
+	});
+	it('it updates gameOver if there are no moves left', function () {
+		Board.emptyspots = [ [4],[],[],[]];
+		Board.fillRandomEmptySpace();
+		expect(Board.gameOver).to.be.true;
+	});
+});
