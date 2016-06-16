@@ -34,15 +34,27 @@ describe("actualScore", function (){
 
 describe("clusteringScore", function (){
 	it ("has gets lower score when the high tiles are close to eachother ", function() {
-		Board.board = [[0,2,2,2048],
-						[4,2,2,0],
-						[128,2,2,0],
-						[4,2048,8,4]];
-		let worseBoard = new board();
-		worseBoard.board = [[0,2,2,0],
+		Board.board = [[0,2,2,0],
 						[4,2,2,0],
 						[2048,256,128,0],
 						[0,2,8,4]];
+		let worseBoard = new board();
+		worseBoard.board = [[0,2,2,2048],
+						[4,2,2,0],
+						[128,2,2,0],
+						[4,2048,8,4]];
+		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
+	});
+	it ("works in a bunch of situations", function () {
+			Board.board = [[0,2,2,0],
+						[4,2,2,0],
+						[128,2,2,0],
+						[4,2048,2048,256]];
+		let worseBoard = new board();
+		worseBoard.board = [[2,0,456,0],
+						[0,2,128,2048],
+						[2048,0,0,0],
+						[0,128,0,128]];
 		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
 	});
 	// it ("has gets lower score when the high tiles are on sides or corners ", function() {
