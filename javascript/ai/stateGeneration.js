@@ -22,22 +22,23 @@ function createAllPossibleDelibrateStates(currNode) {
 	return [right, left, up, down];
 }
 
-function createRandomState (board, rowIndex, colIndex, val) {
-	let newBoard = new Board();
-	console.log(newBoard);
-	// 	newBoard.board = board; 
-	// let newnode = new node(newBoard);
-	// newnode.state[rowIndex][colIndex] = val;
-	newnode.state.emptyspots[randomRowIndex].splice(indexToUpdate, 1);
-	// return newnode;
+function createRandomState (currNodeBoardObj, rowIndex, colIndex, val) {
+	let board = new Board();
+	board.board = currNodeBoardObj.board;
+	console.log(currNodeBoardObj.board)
+	board.board[rowIndex][colIndex] = val;
+
+	board.emptyspots[rowIndex].splice(colIndex, 1);
+	let node = new Node(board);
+	return node;
 }
 
-function createAllPossibleRandomStates(board) {
+function createAllPossibleRandomStates(currNode) {
 	let options = [2, 4];
 	let possibleStates = [];
 	for(let i = 0; i < 4; i++){
 
-		let possibleRow = board[i];
+		let possibleRow = currNode.boardObj.board[i];
 		for(let j = 0; j < possibleRow.length; j++) {
 
 			for(let k = 0; k < 2; k++) {

@@ -9,16 +9,15 @@ const Board = require('../javascript/board.js');
 const board = new Board();
 const Node = require('../javascript/ai/node');
 const testBoard = [[0,4,0,0],
-				 [2,0,0,0],
-				 [0,0,0,0],
-				 [0,4,0,0]];
+				   [2,0,0,0],
+				   [0,0,0,0],
+				  [0,4,0,0]];
 board.board = testBoard;
 const node = new Node (board);
 
 describe("createDelibrateState", function (){
-	
 	it ("creates an instance of node", function (){
-		var possibleDelibrateState = stateGen.createDelibrateState(board, "horizontal", "right");
+		var possibleDelibrateState = stateGen.createDelibrateState(node.boardObj, "horizontal", "right");
 		expect(possibleDelibrateState).to.be.an.instanceof(Node);
 		expect(possibleDelibrateState.boardObj.board[0][3]).to.equal(4);
 	});
@@ -33,6 +32,17 @@ describe("createAllPossibleDelibrateStates", function (){
 	});
 });
 
-describe("createAllRandomDelibrateStates", function (){
+describe("createRandomState", function (){
+	//024
 
+
+	it('returns a new node', function(){
+		var possibleState = stateGen.createRandomState(node.boardObj, 0, 2, 4);
+		expect(possibleState).to.be.an.instanceof(Node);
+	});
+	it ("it adds val to col in row", function() {
+		var possibleState = stateGen.createRandomState(node.boardObj, 0, 2, 4);
+		expect(possibleState.boardObj.board[0][2]).to.equal(4);
+	});
 });
+
