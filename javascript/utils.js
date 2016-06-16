@@ -7,6 +7,17 @@ function twoOrFour () {
 	return options[random-1];
 }
 
+//O(n)
+//(arr[[], []]) => []
+function getFlatArr (arr) {
+	return arr.reduce((a, b) =>{
+			a = a.concat(b);
+			return a;
+		}, []);
+}
+function absoluteDiff (x, y) {
+	return x - y;
+}
 //(arr[arr]) => (arr[arr])
 //O(n*n)
 function transpose(arr) {
@@ -25,6 +36,29 @@ function transpose(arr) {
 	return t;
 }
 
+function getNeighbors (arr, i) {
+	// var neighbors = {
+	// 	top: arr[i-4],
+	// 	right: arr[i+1],
+	// 	down: arr[i+4],
+	// 	left: arr[i-1]
+	// };
+	let neighbors = [arr[i-4], arr[i+1], arr[i+4], arr[i-1]];
+	return neighbors
+}
+
+//ignore zeros
+function getAverageDiffSansZeros (arr) {
+	var length = 0;
+	var sum = arr.reduce((a, b) => {
+		if (b) {
+			a += b;
+			length++;
+		}
+		return a
+	}, 0);
+	return sum/length;
+}
 //(number) => arr- with length of num 
 //O(n)
 function fillZeros(length) {
@@ -39,5 +73,9 @@ function fillZeros(length) {
 module.exports = {
 	twoOrFour: twoOrFour,
 	transpose: transpose,
-	fillZeros: fillZeros
+	fillZeros: fillZeros,
+	getFlatArr: getFlatArr,
+	absoluteDiff: absoluteDiff,
+	getAverageDiffSansZeros: getAverageDiffSansZeros,
+	getNeighbors: getNeighbors
 }

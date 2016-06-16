@@ -18,3 +18,17 @@ describe('transpose', function () {
 	});
 });
 
+describe('getAverageDiffSansZeros', function () {
+	it('gets averageDiff with no zeros', function () {
+		expect(utils.getAverageDiffSansZeros([1,2,3])).to.equal(2);
+	});
+	it('it ignores zeros when they are there', function () {
+		expect(utils.getAverageDiffSansZeros([1,2,3, 0, 0])).to.equal(2);
+	});
+	it('it ignores undefined when they are there', function () {
+		expect(utils.getAverageDiffSansZeros([1,2,3, 0, undefined])).to.equal(2);
+	});
+	// it('it rounds', function () {
+	// });
+});
+

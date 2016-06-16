@@ -1,9 +1,11 @@
 'use strict' 
 
 const directions = require("./directions");
-const transpose = require("./utils").transpose;
-const twoOrFour = require("./utils").twoOrFour;
-
+const utils = require("./utils");
+const transpose = utils.transpose;
+const twoOrFour = utils.twoOrFour;
+const getFlatArr = utils.getFlatArr;
+const absoluteDiff = utils.absoluteDiff;
 
 class board {
 	constructor () {
@@ -45,19 +47,31 @@ class board {
 			this.board[i] = swipeInCurrDir(this.board[i]);
 		}
 	}
-	actualScore () {
-		let all = this.board.reduce((a, b) =>{
-			a = a.concat(b);
-			return a;
-		}, []);
+	actualScore () {//o(n)
+		let all = getFlatArr(this.board);
 		return Math.max.apply( Math, all );
+	};
+	//sum of absolute differences from its neighbors (excluding the empty cells) 
+	//take the average difference of those differences
+	clusteredScore () {//o(n)
+		let all = getFlatArr(this.board); 
+		let clusteredScore = all.reduce((a, b, i) => {//o(n)
+			let neighbors = utils.getNeighbors(all, b);//get neighbors
+			let averageDiff = utils.getAverageDiffSansZeros(neighbors, i);
+			// console.log(all, a, b, i)
+		
+			a += utils.getAverageDiffSansZeros(neighbors); //o(n)
+			return a
+		}, 0);		
+		console.log("cluster", clusteredScore);
+		return clusteredScore;
 	}
-	clusteringScore () {
 
-	}
 	heuristicScore () {
 
 	}
 }
+
+
 
 module.exports = board;
