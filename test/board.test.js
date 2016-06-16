@@ -57,19 +57,19 @@ describe("clusteringScore", function (){
 						[0,128,0,128]];
 		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
 	});
-	// it ("has gets lower score when the high tiles are on sides or corners ", function() {
-	// 	Board.board = [[0,2,2,2048],
-	// 					[4,0,8,4],
-	// 					[128,2,2,0],
-	// 					[2048,256,256,128]];
-	// 	let worseBoard = new board();
-	// 	worseBoard.board = [[0,2,2,2048],
-	// 					[2048,256,256,128],
-	// 					[128,2,2,0],
-	// 					[4,0,8,4]];
+	it ("has gets lower score when the high tiles are on sides or corners ", function() {
+		Board.board = [ [0,0,0,0],
+						[0,0,0,0],
+						[0,0,0,0],
+						[2048,256,128,0]];
+		let worseBoard = new board();
+		worseBoard.board = [[0,2048,0,0],
+							[0,256,0,0],
+							[0,128,0,0],
+						    [0,0,0,0]];
 
-	// 	expect(Board.actualScore()).to.be.below(worseBoard.actualScore());
-	// });
+		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
+	});
 });
 describe("swipe", function () {
 	beforeEach(function() {		

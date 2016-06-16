@@ -51,16 +51,16 @@ class board {
 		let all = getFlatArr(this.board);
 		return Math.max.apply( Math, all );
 	};
-	//sum of absolute differences from its neighbors (excluding the empty cells) 
-	//take the average difference of those differences
+
 	clusteredScore () {//o(n)
 		let all = getFlatArr(this.board); 
 		let clusteredScore = all.reduce((a, b, i) => {//o(n)
 			let neighbors = utils.getNeighbors(all, b);//get neighbors
+			//estimate the sum of absolute differences from its neighbors (excluding the empty cells)
+			//we take the average difference.
 			let averageDiff = utils.getAverageDiffSansZeros(neighbors, i);
-				a += averageDiff //o(n)
-				// console.log(averageDiff)
-				return a
+			a += averageDiff //o(n)
+			return a
 		}, 0);		
 		console.log("cluster", clusteredScore);
 		return clusteredScore;
