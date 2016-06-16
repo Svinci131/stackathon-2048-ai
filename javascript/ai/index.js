@@ -30,7 +30,7 @@ class tree {
 		}
 		if (maximizingPlayer) {  //ai
 		
-			node.children = createAllPossibleDelibrateStates(currNode);
+			node.children = createAllPossibleDelibrateStates(node);
 			let bestVal = -Infinity;
 			// console.log(depth, "p1", node);
 			node.children.forEach(child => {
@@ -43,7 +43,7 @@ class tree {
 		
 		else { //normal comp
 			
-			node.children = createAllPossibleRandomStates(node.state);
+			node.children = createAllPossibleRandomStates(node);
 			let bestVal = Infinity;
 			// console.log(depth, "p2", node);
 
@@ -61,7 +61,7 @@ class tree {
 
 let Tree = new tree ();
 
-console.log(Tree.minimax(Tree.head, 2, true));
+console.log(Tree.minimax(Tree.head, 7, true));
 
 
 
