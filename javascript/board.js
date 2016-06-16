@@ -11,6 +11,7 @@ class board {
 		this.lastOrientation = "horizontal";
 		this.emptyspots = [[0,1,2,3],[0,1,2,3],[0,1,2,3],[0,1,2,3]];
 		this.gameOver = false; 
+		this.transposed 
 	}
 	//O(1) = add 2 or 4 to a random emptysquare w 0
 	fillRandomEmptySpace() {
@@ -28,6 +29,7 @@ class board {
 	update (orientation, direction) {
 		//if direction is diff transpose
 		if (orientation !== this.lastOrientation) {
+			console.log("here")
 			this.board = transpose(this.board);
 		}
 		let swipeFunc = directions[orientation][direction];//define direction to swipe in 
