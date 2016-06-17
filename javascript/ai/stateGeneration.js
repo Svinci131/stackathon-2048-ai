@@ -1,4 +1,5 @@
 'use strict'
+
 const Board = require("../board");
 const Node = require("./node");
 const clone = require('lodash.clone');
@@ -12,7 +13,6 @@ function createDelibrateState (currNodeBoard, orientation, direction) {
 	return node;
 }
 
-
 //(BoardObj) => [nodeobj];
 function createAllPossibleDelibrateStates(currNode) {
 	// console.log("in states", currNode.boardObj.board);
@@ -22,22 +22,13 @@ function createAllPossibleDelibrateStates(currNode) {
 	let up = createDelibrateState(board, "vertical", "up");
 	let down = createDelibrateState(board, "vertical", "down");
 	// console.log("in states after", currNode.boardObj.board);
-	return [right, left, up, down];
+	return [right, left,  down, up];
 }
 
-function createRandomState (currNodeBoard, currNodeEmptySpots, rowIndex, colIndex, val) {
-
+function createRandomState (currNodeBoard, rowIndex, colIndex, val) {
 	let board = new Board();//create board
 	board.board = clone(currNodeBoard); //clone parentboard
-	board.emptyspots = clone(currNodeEmptySpots);//clone parentemptyspaces
 	board.board[rowIndex][colIndex] = val;//set space in new board to val 
-
-	if (board.emptyspots[rowIndex].length) {
-		board.emptyspots[rowIndex].splice(colIndex, 1);
-	}
-	else {
-		board.gameOver = true;
-	}
 	let node = new Node(board);
 	return node;
 }
@@ -46,16 +37,15 @@ function createAllPossibleRandomStates(currNode) {
 	let options = [2, 4];
 	let possibleStates = [];
 	let board = currNode.boardObj.board;
-	let emptyspots = currNode.boardObj.emptyspots;
-	for(let i = 0; i < 4; i++){
-		let possibleRow = currNode.boardObj.board[i];
-		for(let j = 0; j < possibleRow.length; j++) {
-			for(let k = 0; k < 2; k++) {
-				let possibleState = createRandomState(board, emptyspots, i, j, options[k]);
-				possibleStates.push(possibleState);
-			}
+	let emptySpots = currNode.boardObj.getEmptySpots();
+	emptySpots.forEach((coords, i) => {
+		let rowIndex = coords[0];
+		let colIndex = coords[1];
+		for(let k = 0; k < 2; k++) {
+			let possibleState = createRandomState(board,rowIndex, colIndex, options[k]);
+			possibleStates.push(possibleState);
 		}
-	}
+	});
 	return possibleStates;
 }
 

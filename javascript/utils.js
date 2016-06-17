@@ -15,6 +15,7 @@ function getFlatArr (arr) {
 			return a;
 		}, []);
 }
+
 function absoluteDiff (x, y) {
 	return x - y;
 }

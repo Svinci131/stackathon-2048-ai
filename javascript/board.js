@@ -12,21 +12,32 @@ class board {
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
 		this.lastOrientation = "horizontal";
 		this.lastDirection;
-		this.emptyspots = [[0,1,2,3],[0,1,2,3],[0,1,2,3],[0,1,2,3]];
 		this.gameOver = false; 
 		this.transposed; 
 	}
 	//O(1) = add 2 or 4 to a random emptysquare w 0
+	getEmptySpots() {
+		var emptySpots = [];
+		for(var i=0; i < this.board.length; i++) {
+			for(var j=0; j < this.board[i].length; j++) {
+				if(this.board[i][j] == 0){
+					emptySpots.push([i,j]);
+				}
+			}
+		}	
+		return emptySpots;	
+	}
+
 	fillRandomEmptySpace() {
-	 	const randomRowIndex = Math.round(Math.random() * (3 - 0) + 0);
-		const randomRow = this.emptyspots[randomRowIndex];
-		if (randomRow.length) {
-			const indexToUpdate = Math.round(Math.random() * ((randomRow.length-1) - 0) + 0);
-		 	const randomCell = randomRow[indexToUpdate];
-		 	this.board[randomRowIndex][randomCell] = twoOrFour();
-		 	this.emptyspots[randomRowIndex].splice(indexToUpdate, 1);
+		var emptySpots = this.getEmptySpots();
+		if(emptySpots.length > 0) {
+			var random = Math.floor(Math.random() * emptySpots.length);
+			var cell = emptySpots[random];
+			this.board[cell[0]][cell[1]] = twoOrFour();
+		} 
+		else {
+			this.gameOver = true;
 		}
-		else this.gameOver = true;
 	}
 	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
 	update (orientation, direction) { 
@@ -39,12 +50,14 @@ class board {
 		this.swipe(swipeFunc);//swipe
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
 	}
+
 	//(func)- compress each row based on direction
 	swipe (swipeInCurrDir) {
 		//update each row on board
 		for (let i = 0; i<4; i++) {
 			this.board[i] = swipeInCurrDir(this.board[i]);
 		}
+
 	}
 	//o(n)
 	actualScore () {
@@ -68,7 +81,7 @@ class board {
 	heuristicScore () {
 		let actualScore = this.actualScore();
 		let clusteredScore = this.clusteredScore();
-		let numberOfEmptyCells = getFlatArr(this.emptyspots).length;//o(n)
+		let numberOfEmptyCells = this.getEmptySpots().length;//o(n)
 		let score = (actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore);
 		return Math.max(score, Math.min(actualScore, 1));
 	}

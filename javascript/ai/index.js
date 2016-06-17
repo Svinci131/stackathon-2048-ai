@@ -9,6 +9,11 @@ const aiGame = new Tree(board);
 const game = aiGame.head.boardObj
 const gameOver =  game.board.gameOver;
 
+game.fillRandomEmptySpace();
+
+// let bestMove = aiGame.alphaBeta(aiGame.head, 3, -Infinity, Infinity, true);
+
+// console.log("here",bestMove);
 while(!gameOver) {
 	console.log("before", aiGame.head.boardObj.board)
 	//render();

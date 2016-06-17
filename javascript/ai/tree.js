@@ -11,21 +11,65 @@ class Tree {
 		this.head = new Node (board);
 		this.bestDirections = [];
 	}	
+	min (a, b) {
+		if (a instanceof Node) {
+			a = a.score < b.score ? a : b;
+		}
+		else {
+			a = a < b.score ? a : b;
+		}
+		return a;
+	}
+	max (a, b) {
+		if (a instanceof Node) {
+			a = a.score > b.score ? a : b;
+		}
+		else {
+			a = a > b.score ? a : b;
+		}
+		return a;
+	}
+	alphaBeta (node, depth, a, b, maximizingPlayer) {
+		if (depth === 0 || node.boardObj.board.gameOver) {
+			return node; 
+		}
+		if (maximizingPlayer) {  //ai 
+			node.children = createAllPossibleDelibrateStates(node);
+			for(let i = 0; i < node.children.length; i++) {
+				let child = node.children[i];
+				a = this.max(a, this.alphaBeta(child, depth-1, a, b, false));
+				if (b <= a) {
+					break;
+				}
+			}
+			if (depth === 3) {
+				console.log(node.score, a)
+			}
+			return a;
+		}
+		else {
+			node.children = createAllPossibleRandomStates(node);
+			for(let i = 0; i < node.children.length; i++) {
+				let child = node.children[i];
+				b = this.min(b, this.alphaBeta(child, depth-1, a, b, true));
+				if (b <= a) {
+					break;
+				}
+			}
+			return b;
+		}
+	}
 	minimax (node, depth, maximizingPlayer) {
-
-		
 		if (depth === 0 || node.boardObj.board.gameOver) {
 			return node; 
 		}
 		
 		if (maximizingPlayer) {  //ai 
-
 			node.children = createAllPossibleDelibrateStates(node);
-	
 			let best = -Infinity;
 			node.children.forEach(child => {
-		
 				let val = this.minimax(child, depth-1, false); 
+				// console.log("score", val.score);
 				if (best instanceof Node) {
 					best = best.score > val.score ? best : val;
 				}
