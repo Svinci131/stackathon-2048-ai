@@ -14,7 +14,7 @@ class tree {
 		this.bestDirections = [];
 	}	
 	minimax (node, depth, maximizingPlayer) {
-		// console.log(depth);
+
 		if (depth === 0 || node.boardObj.gameOver) {
 			return node; 
 		}
@@ -22,7 +22,6 @@ class tree {
 		if (maximizingPlayer) {  //ai 
 			node.children = createAllPossibleDelibrateStates(node);
 			let best = -Infinity;
-			// console.log(depth, "p1", node);
 			node.children.forEach(child => {
 				let val = this.minimax(child, depth-1, false); 
 				if (best instanceof Node) {
@@ -34,7 +33,6 @@ class tree {
 		}
 		
 		else { //normal comp
-			
 			node.children = createAllPossibleRandomStates(node);
 			let best = Infinity;
 			// console.log(depth, "p2", node);
@@ -47,7 +45,6 @@ class tree {
 				else best = best < val.score ? best : val;
 				// bestVal = Math.min(bestVal, val);			
 			});
-
 			return best;
 		}
 	}
