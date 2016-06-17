@@ -38,14 +38,11 @@ class board {
 		let swipeFunc = directions[orientation][direction];//define direction to swipe in 
 		this.swipe(swipeFunc);//swipe
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
-		//updates gameOver if no empty spaces
-		// this.fillRandomEmptySpace();//set a random zero space to 2 or 4(remove from empty spots)
 	}
 	//(func)- compress each row based on direction
 	swipe (swipeInCurrDir) {
 		//update each row on board
 		for (let i = 0; i<4; i++) {
-			// console.log("HERE", this)
 			this.board[i] = swipeInCurrDir(this.board[i]);
 		}
 	}

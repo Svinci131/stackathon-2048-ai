@@ -1,6 +1,7 @@
 'use strict'
 const Board = require("../board");
 const Tree = require('./tree');
+
 // const render = require('../frontend/render.js');
 
 const board = new Board ();
