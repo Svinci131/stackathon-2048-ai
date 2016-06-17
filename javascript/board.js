@@ -45,6 +45,7 @@ class board {
 	swipe (swipeInCurrDir) {
 		//update each row on board
 		for (let i = 0; i<4; i++) {
+			// console.log("HERE", this)
 			this.board[i] = swipeInCurrDir(this.board[i]);
 		}
 	}
