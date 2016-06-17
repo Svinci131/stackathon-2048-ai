@@ -8,20 +8,15 @@ const gameBoard = new board();
 // console.log(gameBoard);
 
 function start () {
-	console.log("random");
 	gameBoard.fillRandomEmptySpace();
-	console.log("render");
 	render(gameBoard);
 }
 
 // //drawBoard 
 function render (gameBoard) {
 	let board = gameBoard.board;
-	console.log(board);
-	//wtf?
 	let orientation = gameBoard.lastOrientation;
 
-	
 	for (let i = 0; i<4; i++) {
 		for (let j = 0; j<4; j++) { 
 			let row, col;
@@ -31,11 +26,9 @@ function render (gameBoard) {
 				col = j;
 			}
 			else {
-				console.log(orientation)
 				row = j;
 				col = i;
 			}
-			
 			if (el.text() !== board[row][col]) {
 				el.empty();
 				if (board[row][col]) {
