@@ -111,6 +111,7 @@ describe("swipe", function () {
 							[4,2,8,4]];
 		expect(Board.board).to.eql(expectedBoard);	
 	});
+	
 	describe("swipe new orientation", function() {
 		//idk why this doesnt work
 		beforeEach(function() {		

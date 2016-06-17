@@ -1,17 +1,20 @@
 'use strict' 
 
 
-const board = require('./board');
-const gameBoard = new board(); 
-
+const Board = require('./board');
+const board = new Board(); 
+let aiMode = false;
 // const directions = require("./directions")
-// console.log(gameBoard);
+// console.log(board);
+
+$('#ai').on("click", function() {
+	aiMode = !aiMode;
+});
 
 function start () {
-	gameBoard.fillRandomEmptySpace();
-	render(gameBoard);
+	board.fillRandomEmptySpace();
+	render(board);
 }
-
 // //drawBoard 
 function render (gameBoard) {
 	let board = gameBoard.board;
@@ -43,35 +46,45 @@ function render (gameBoard) {
 	}
 }
 
+//ai
 
+
+
+
+
+
+
+
+
+//human user 
 start();
-
 $("body").keydown(e => {
+	console.log(aiMode)
+	if (!aiMode) {
+		if(e.keyCode === 37) { //left
+			board.update ("horizontal", "left"); 
+			render(board);
 
-	if(e.keyCode === 37) { //left
-		gameBoard.update ("horizontal", "left"); 
-		render(gameBoard);
+		}
+		else if(e.keyCode === 39) { //right
+			board.update ("horizontal", "right");
+			render(board);
 
+		}
+		else if(e.keyCode === 38) { //up
+			board.update ("vertical", "up");
+			render(board);
+
+		}
+		else if(e.keyCode === 40) { //up
+			board.update ("vertical", "down");
+			render(board);
+
+		}
+		// setTimeout(function(){ 
+			board.fillRandomEmptySpace();
+			render(board);
+		// }, 500)
 	}
-	else if(e.keyCode === 39) { //right
-		gameBoard.update ("horizontal", "right");
-		render(gameBoard);
-
-	}
-	else if(e.keyCode === 38) { //up
-		gameBoard.update ("vertical", "up");
-		render(gameBoard);
-
-	}
-	else if(e.keyCode === 40) { //up
-		gameBoard.update ("vertical", "down");
-		render(gameBoard);
-
-	}
-	// setTimeout(function(){ 
-		gameBoard.fillRandomEmptySpace();
-		render(gameBoard);
-	// }, 500)
-
 });
 	
