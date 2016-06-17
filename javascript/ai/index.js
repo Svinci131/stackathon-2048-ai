@@ -1,15 +1,27 @@
 'use strict'
-
+const Board = require("../board");
 const Tree = require('./tree');
-const render = require('../frontend/render.js');
-const aiGame = new Tree();
-const game = aiGame.head.boardObj
-const gameOver =  game.gameOver;
+// const render = require('../frontend/render.js');
 
-while(!gameOver) {
-	render();
-	let bestMove = Tree.minimax(Tree.head, 3, true).boardObj.board;
-	game.update(bestMove.lastOrientation, bestMove.lastOrientation);
-	game.fillRandomEmptySpace();
-} 
+const board = new Board ();
+const aiGame = new Tree(board);
+
+const game = aiGame.head.boardObj
+const gameOver =  game.board.gameOver;
+
+game.fillRandomEmptySpace();
+
+console.log("before", aiGame.head.boardObj.board)
+
+// while(!gameOver) {
+	// render();
+	let bestMove = aiGame.minimax(aiGame.head, 1, true).boardObj;
+	console.log("after",aiGame.head.boardObj.board)
+	console.log(bestMove.lastOrientation, bestMove.lastDirection)
+
+	// game.update(bestMove.lastOrientation, bestMove.lastOrientation);
+
+	// game.fillRandomEmptySpace();
+
+// } 
 //let bestMove = Tree.minimax(Tree.head, 3, true);

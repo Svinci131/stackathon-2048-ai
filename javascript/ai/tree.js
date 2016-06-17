@@ -6,29 +6,36 @@ const createAllPossibleRandomStates  = require('./stateGeneration').createAllPos
 const createAllPossibleDelibrateStates = require('./stateGeneration').createAllPossibleDelibrateStates;
 const Node = require("./node");
 
-class tree {
-	constructor () {
-		let board = new Board ();
-		board.fillRandomEmptySpace();
+class Tree {
+	constructor (board) {
 		this.head = new Node (board);
 		this.bestDirections = [];
 	}	
 	minimax (node, depth, maximizingPlayer) {
 
-		if (depth === 0 || node.boardObj.gameOver) {
+		
+		if (depth === 0 || node.boardObj.board.gameOver) {
 			return node; 
 		}
 		
 		if (maximizingPlayer) {  //ai 
+
 			node.children = createAllPossibleDelibrateStates(node);
+			if (depth === 3) {
+				console.log("in mm", node.boardObj.board)
+			}
 			let best = -Infinity;
 			node.children.forEach(child => {
+				// if (depth === 3) {
+				// 	console.log("child", child.boardObj.board)
+				// }
 				let val = this.minimax(child, depth-1, false); 
 				if (best instanceof Node) {
 					best = best.score > val.score ? best : val;
 				}
 				else best = best > val.score ? best : val;
 			});
+
 			return best;
 		}
 		
@@ -52,12 +59,12 @@ class tree {
 
 
 
-let Tree = new tree ();
+// let Tree = new tree ();
 
-let bestMove = Tree.minimax(Tree.head, 5, true);
-console.log("here", bestMove);
+// let bestMove = Tree.minimax(Tree.head, 6, true);
+// console.log("here", bestMove);
 
-module.exports = tree;
+module.exports = Tree;
 //The Minimax is a recursive algorithm which can be used for solving two-player zero-sum games
 //steps: 
 	//searches through the space of possible game states creating a tree

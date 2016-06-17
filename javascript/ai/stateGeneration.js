@@ -1,12 +1,12 @@
 'use strict'
 const Board = require("../board");
 const Node = require("./node");
-
+const clone = require('lodash.clone');
 
 //(boardArr) => nodeobj
-function createDelibrateState (currNodeBoardObj, orientation, direction) {
+function createDelibrateState (currNodeBoard, orientation, direction) {
 	let board = new Board (); 
-	board.board = currNodeBoardObj.board;
+	board.board = clone(currNodeBoard);
 	board.update(orientation, direction);
 	let node = new Node(board);
 	return node;
@@ -15,10 +15,13 @@ function createDelibrateState (currNodeBoardObj, orientation, direction) {
 
 //(BoardObj) => [nodeobj];
 function createAllPossibleDelibrateStates(currNode) {
-	let right = createDelibrateState(currNode.boardObj, "horizontal", "right");
-	let left = createDelibrateState(currNode.boardObj, "horizontal", "left");
-	let up = createDelibrateState(currNode.boardObj, "vertical", "up");
-	let down = createDelibrateState(currNode.boardObj, "vertical", "down");
+	// console.log("in states", currNode.boardObj.board);
+	let board = currNode.boardObj.board;
+	let right = createDelibrateState(board, "horizontal", "right");
+	let left = createDelibrateState(board, "horizontal", "left");
+	let up = createDelibrateState(board, "vertical", "up");
+	let down = createDelibrateState(board, "vertical", "down");
+	// console.log("in states after", currNode.boardObj.board);
 	return [right, left, up, down];
 }
 
