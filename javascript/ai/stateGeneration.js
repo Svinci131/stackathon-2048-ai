@@ -25,11 +25,13 @@ function createAllPossibleDelibrateStates(currNode) {
 	return [right, left, up, down];
 }
 
-function createRandomState (currNodeBoardObj, rowIndex, colIndex, val) {
+function createRandomState (currNodeBoard, rowIndex, colIndex, val) {
+	// console.log(currNodeBoard)
 	let board = new Board();
-	board.board = currNodeBoardObj.board;
-	board.board[rowIndex][colIndex] = val;
+	board.board = clone(currNodeBoard);
 
+	// board.emptyspots = clone(currNodeEmptySpots);
+	board.board[rowIndex][colIndex] = val;
 	board.emptyspots[rowIndex].splice(colIndex, 1);
 	let node = new Node(board);
 	return node;
@@ -38,12 +40,13 @@ function createRandomState (currNodeBoardObj, rowIndex, colIndex, val) {
 function createAllPossibleRandomStates(currNode) {
 	let options = [2, 4];
 	let possibleStates = [];
+	let board = currNode.boardObj.board;
+	// let emptyspots = currNode.boardObj.emptyspots;
 	for(let i = 0; i < 4; i++){
-
 		let possibleRow = currNode.boardObj.board[i];
 		for(let j = 0; j < possibleRow.length; j++) {
 			for(let k = 0; k < 2; k++) {
-				let possibleState = createRandomState(currNode.boardObj, i, j, options[k]);
+				let possibleState = createRandomState(board, i, j, options[k]);
 				possibleStates.push(possibleState);
 			}
 		}

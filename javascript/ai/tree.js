@@ -21,9 +21,9 @@ class Tree {
 		if (maximizingPlayer) {  //ai 
 
 			node.children = createAllPossibleDelibrateStates(node);
-			if (depth === 3) {
-				console.log("in mm", node.boardObj.board)
-			}
+			// if (depth === 3) {
+			// 	console.log("in mm", node.boardObj.board)
+			// }
 			let best = -Infinity;
 			node.children.forEach(child => {
 				// if (depth === 3) {
