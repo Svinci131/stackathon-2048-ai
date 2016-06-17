@@ -32,9 +32,11 @@ class tree {
 				}
 				else best = best > val.score ? best : val;
 			});
-
-			// this.bestDirections.push(best.boardObj.lastOrientaion);
-			// console.log(depth, "p1", bestVal);
+			// if (depth === 3) {
+			// 	this.head.update
+			// 	console.log(best.boardObj.lastOrientation);
+			// 	console.log(best.boardObj.lastDirection);
+			// }
 			return best;
 		}
 		
@@ -62,8 +64,8 @@ class tree {
 
 let Tree = new tree ();
 
-Tree.minimax(Tree.head, 3, true);
-console.log(Tree.bestDirections);
+let bestMove = Tree.minimax(Tree.head, 3, true);
+console.log("here", bestMove);
 
 
 //The Minimax is a recursive algorithm which can be used for solving two-player zero-sum games
