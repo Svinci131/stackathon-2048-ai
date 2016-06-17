@@ -15,9 +15,11 @@ function start () {
 }
 
 // //drawBoard 
-function render (gameBoard) {
+function render (gameBoard, orientation) {
 	let board = gameBoard.board;
-	let orientation = gameBoard.lastOrientation;
+	//wtf?
+	var orientation = gameBoard.lastOrientation;
+
 	let row, col;
 	for (let i = 0; i<4; i++) {
 		for (let j = 0; j<4; j++) { 
@@ -26,12 +28,14 @@ function render (gameBoard) {
 				col = j;
 			}
 			else {
+				console.log(orientation)
 				row = j;
 				col = i;
 			}
 			let el = $('[data-cellid="'+row+"-"+col+'"]');
+			el.empty();
+			
 			if (el.text() !== board[row][col]) {
-				el.empty();
 				if (board[row][col]) {
 					$(el).html('<div class="cell-num"><h1>'+board[row][col]+'</h1></div>')
 				}
@@ -69,9 +73,10 @@ $("body").keydown(e => {
 		render(gameBoard);
 
 	}
-
-	gameBoard.fillRandomEmptySpace();
-	render(gameBoard);
+	setTimeout(function(){ 
+		gameBoard.fillRandomEmptySpace();
+		render(gameBoard);
+	}, 500)
 
 });
 	
