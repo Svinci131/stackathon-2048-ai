@@ -1,45 +1,81 @@
-'use strict' 
+// 'use strict' 
 
-const board = require('../board');
-const gameBoard = new board(); 
-const clone = require('lodash.clone');
-const render = require('../frontend/render.js');
-let lastBoard = clone(gameBoard.board); 
+// const board = require('./board');
+// const gameBoard = new board(); 
 
-// console.log(render)
+// // const directions = require("./directions")
+// // console.log(gameBoard);
 
-	function start () {
-		gameBoard.fillRandomEmptySpace();
+// function start () {
+// 	console.log("random");
+// 	gameBoard.fillRandomEmptySpace();
+// 	console.log("render");
+// 	render(gameBoard);
+// }
 
-		render(gameBoard);
-	}
-	start();
+// // //drawBoard 
+// function render (gameBoard, orientation) {
+// 	let board = gameBoard.board;
+// 	//wtf?
+// 	var orientation = gameBoard.lastOrientation;
 
-	$("body").keydown(e => {
+// 	let row, col;
+// 	for (let i = 0; i<4; i++) {
+// 		for (let j = 0; j<4; j++) { 
+// 			if (orientation === "horizontal") {
+// 				row = i;
+// 				col = j;
+// 			}
+// 			else {
+// 				console.log(orientation)
+// 				row = j;
+// 				col = i;
+// 			}
+// 			let el = $('[data-cellid="'+row+"-"+col+'"]');
+// 			el.empty();
+			
+// 			if (el.text() !== board[row][col]) {
+// 				if (board[row][col]) {
+// 					$(el).html('<div class="cell-num"><h1>'+board[row][col]+'</h1></div>')
+// 				}
+// 				else {
+// 					$(el).html('<div class="cell-num zero"><h1>'+board[row][col]+'</h1></div>')
+// 				}
+// 			}
+			
+// 		}
+// 	}
+// }
 
-		if(e.keyCode === 37) { //left
-			console.log("left")
-			gameBoard.update ("horizontal", "left");
-			gameBoard.fillRandomEmptySpace();
-		}
-		else if(e.keyCode === 39) { //right
-			console.log("right")
-			gameBoard.update ("horizontal", "right");
-			gameBoard.fillRandomEmptySpace();
-		}
-		else if(e.keyCode === 38) { //up
-			console.log("up")
-			gameBoard.update ("vertical", "up");
-			gameBoard.fillRandomEmptySpace();
 
-		}
-		else if(e.keyCode === 40) { //down
-			console.log("down")
-			gameBoard.update ("vertical", "down");
-			gameBoard.fillRandomEmptySpace();
-		}
-		lastBoard = clone(gameBoard.board);
-		// render(gameBoard);
-	});
+// start();
+
+// $("body").keydown(e => {
+
+// 	if(e.keyCode === 37) { //left
+// 		gameBoard.update ("horizontal", "left"); 
+// 		render(gameBoard);
+
+// 	}
+// 	else if(e.keyCode === 39) { //right
+// 		gameBoard.update ("horizontal", "right");
+// 		render(gameBoard);
+
+// 	}
+// 	else if(e.keyCode === 38) { //up
+// 		gameBoard.update ("vertical", "up");
+// 		render(gameBoard);
+
+// 	}
+// 	else if(e.keyCode === 40) { //up
+// 		gameBoard.update ("vertical", "down");
+// 		render(gameBoard);
+
+// 	}
+// 	setTimeout(function(){ 
+// 		gameBoard.fillRandomEmptySpace();
+// 		render(gameBoard);
+// 	}, 500)
+
+// });
 	
-

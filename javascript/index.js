@@ -15,14 +15,17 @@ function start () {
 }
 
 // //drawBoard 
-function render (gameBoard, orientation) {
+function render (gameBoard) {
 	let board = gameBoard.board;
+	console.log(board);
 	//wtf?
-	var orientation = gameBoard.lastOrientation;
+	let orientation = gameBoard.lastOrientation;
 
-	let row, col;
+	
 	for (let i = 0; i<4; i++) {
 		for (let j = 0; j<4; j++) { 
+			let row, col;
+			let el = $('[data-cellid="'+i+"-"+j+'"]');
 			if (orientation === "horizontal") {
 				row = i;
 				col = j;
@@ -32,10 +35,9 @@ function render (gameBoard, orientation) {
 				row = j;
 				col = i;
 			}
-			let el = $('[data-cellid="'+row+"-"+col+'"]');
-			el.empty();
 			
 			if (el.text() !== board[row][col]) {
+				el.empty();
 				if (board[row][col]) {
 					$(el).html('<div class="cell-num"><h1>'+board[row][col]+'</h1></div>')
 				}
@@ -73,10 +75,10 @@ $("body").keydown(e => {
 		render(gameBoard);
 
 	}
-	setTimeout(function(){ 
+	// setTimeout(function(){ 
 		gameBoard.fillRandomEmptySpace();
 		render(gameBoard);
-	}, 500)
+	// }, 500)
 
 });
 	
