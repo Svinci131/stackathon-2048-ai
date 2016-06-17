@@ -17,7 +17,7 @@ game.fillRandomEmptySpace();
 // while(!gameOver) {
 for (let i = 5; i>0; i--) {
 	console.log("before", aiGame.head.boardObj.board)
-	// render();
+	//render();
 	let bestMove = aiGame.minimax(aiGame.head, 3, true).boardObj;
 	let orientation = bestMove.lastOrientation;
 	let direction = bestMove.lastDirection;
