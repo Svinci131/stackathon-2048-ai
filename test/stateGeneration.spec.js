@@ -34,8 +34,6 @@ describe("createAllPossibleDelibrateStates", function (){
 
 describe("createRandomState", function (){
 	//024
-
-
 	it('returns a new node', function(){
 		var possibleState = stateGen.createRandomState(node.boardObj, 0, 2, 4);
 		expect(possibleState).to.be.an.instanceof(Node);
@@ -45,4 +43,8 @@ describe("createRandomState", function (){
 		expect(possibleState.boardObj.board[0][2]).to.equal(4);
 	});
 });
-
+describe("createAllPossibleRandomStates", function (){
+	it("gets create a new node with two and four for everypossible empty space", function() {
+		
+	});
+});

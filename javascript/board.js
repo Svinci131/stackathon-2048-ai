@@ -39,7 +39,6 @@ class board {
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
 		//updates gameOver if no empty spaces
 		// this.fillRandomEmptySpace();//set a random zero space to 2 or 4(remove from empty spots)
-		console.log("here", this.board)
 	}
 	//(func)- compress each row based on direction
 	swipe (swipeInCurrDir) {
