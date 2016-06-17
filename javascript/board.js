@@ -11,6 +11,7 @@ class board {
 	constructor () {
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
 		this.lastOrientation = "horizontal";
+		this.lastDirection;
 		this.emptyspots = [[0,1,2,3],[0,1,2,3],[0,1,2,3],[0,1,2,3]];
 		this.gameOver = false; 
 		this.transposed; 
@@ -28,9 +29,9 @@ class board {
 		else this.gameOver = true;
 	}
 	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
-	update (orientation, direction) {
-
+	update (orientation, direction) { 
 		//if direction is diff transpose
+		this.lastDirection = direction;
 		if (orientation !== this.lastOrientation) {
 			this.board = transpose(this.board);
 		}

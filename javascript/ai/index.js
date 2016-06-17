@@ -9,14 +9,12 @@ const Node = require("./node");
 class tree {
 	constructor () {
 		let board = new Board ();
-		//otherwise there is no worst move
 		board.fillRandomEmptySpace();
 		this.head = new Node (board);
 		this.bestDirections = [];
 	}	
 	minimax (node, depth, maximizingPlayer) {
 		// console.log(depth);
-
 		if (depth === 0 || node.boardObj.gameOver) {
 			return node; 
 		}
@@ -32,11 +30,6 @@ class tree {
 				}
 				else best = best > val.score ? best : val;
 			});
-			// if (depth === 3) {
-			// 	this.head.update
-			// 	console.log(best.boardObj.lastOrientation);
-			// 	console.log(best.boardObj.lastDirection);
-			// }
 			return best;
 		}
 		

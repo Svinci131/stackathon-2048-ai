@@ -12,24 +12,23 @@ function start () {
 	render(gameBoard);
 }
 
+
 // //drawBoard 
 function render (gameBoard) {
 	let board = gameBoard.board;
 	let orientation = gameBoard.lastOrientation;
-	console.log(board)
-	for (let row = 0; row<4; row++) {
-		for (let col = 0; col<4; col++) { 
-			let el = $('[data-cellid="'+row+"-"+col+'"]');
-			console.log("h", row, "v", col);
-			console.log("v", col,  "h", row);
-
+	let row, col;
+	for (let i = 0; i<4; i++) {
+		for (let j = 0; j<4; j++) { 
 			if (orientation === "horizontal") {
-				let el = $('[data-cellid="'+row+"-"+col+'"]');
+				row = i;
+				col = j;
 			}
 			else {
-				// let el = $('[data-cellid="'+col+"-"+row+'"]');
+				row = j;
+				col = i;
 			}
-
+			let el = $('[data-cellid="'+row+"-"+col+'"]');
 			if (el.text() !== board[row][col]) {
 				el.empty();
 				if (board[row][col]) {
