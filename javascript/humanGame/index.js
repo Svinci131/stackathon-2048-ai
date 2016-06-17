@@ -3,17 +3,13 @@
 console.log("hi")
 const board = require('./board');
 const gameBoard = new board(); 
-const render = require('./render.js');
-// const directions = require("./directions")
-// console.log(gameBoard);
+const render = require('../frontend/render.js');
+
 
 function start () {
-	// console.log(start)
 	gameBoard.fillRandomEmptySpace();
 	render(gameBoard);
 }
-
-
 
 start();
 
