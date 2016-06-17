@@ -21,14 +21,10 @@ class Tree {
 		if (maximizingPlayer) {  //ai 
 
 			node.children = createAllPossibleDelibrateStates(node);
-			// if (depth === 3) {
-			// 	console.log("in mm", node.boardObj.board)
-			// }
+	
 			let best = -Infinity;
 			node.children.forEach(child => {
-				// if (depth === 3) {
-				// 	console.log("child", child.boardObj.board)
-				// }
+		
 				let val = this.minimax(child, depth-1, false); 
 				if (best instanceof Node) {
 					best = best.score > val.score ? best : val;
