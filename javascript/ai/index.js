@@ -6,12 +6,10 @@ const Tree = require('./tree');
 
 const board = new Board ();
 const aiGame = new Tree(board);
-const directions = require("../directions");
 const game = aiGame.head.boardObj
 const gameOver =  game.board.gameOver;
 
 while(!gameOver) {
-
 	console.log("before", aiGame.head.boardObj.board)
 	//render();
 	let bestMove = aiGame.minimax(aiGame.head, 3, true).boardObj;

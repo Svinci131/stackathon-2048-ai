@@ -2,13 +2,17 @@
 
 
 const Board = require('./board');
+const Tree = require('./ai/tree');
 const board = new Board(); 
 let aiMode = false;
-// const directions = require("./directions")
-// console.log(board);
+//ai stuff
+const aiGame = new Tree(board);
+const game = aiGame.head.boardObj
+const gameOver =  game.board.gameOver;
 
 $('#ai').on("click", function() {
-	aiMode = !aiMode;
+	// aiMode = !aiMode;
+	launchAi();
 });
 
 function start () {
@@ -46,18 +50,23 @@ function render (gameBoard) {
 	}
 }
 
+start();
 //ai
-
-
-
-
-
-
-
-
+function launchAi () {
+	while(!gameOver) {
+		let bestMove = aiGame.minimax(aiGame.head, 3, true).boardObj;
+		//console.log("move",bestMove.lastOrientation, bestMove.lastDirection);
+		game.update(bestMove.lastOrientation, bestMove.lastDirection);
+		console.log(render)
+		render(game);
+		//console.log("after playre one",aiGame.head.boardObj.board);
+		game.fillRandomEmptySpace();
+		render(game);
+		//console.log("after Random",aiGame.head.boardObj.board);
+	} 
+}
 
 //human user 
-start();
 $("body").keydown(e => {
 	console.log(aiMode)
 	if (!aiMode) {
