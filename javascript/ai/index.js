@@ -16,11 +16,11 @@ console.log("before", aiGame.head.boardObj.board)
 // while(!gameOver) {
 	// render();
 	let bestMove = aiGame.minimax(aiGame.head, 3, true).boardObj;
-	console.log("after",aiGame.head.boardObj.board)
+	
 	console.log(bestMove.lastOrientation, bestMove.lastDirection)
 
-	// game.update(bestMove.lastOrientation, bestMove.lastOrientation);
-
+	game.update(bestMove.lastOrientation, bestMove.lastOrientation);
+	console.log("after",aiGame.head.boardObj.board)
 	// game.fillRandomEmptySpace();
 
 // } 
