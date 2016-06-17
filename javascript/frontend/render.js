@@ -1,5 +1,6 @@
 // //drawBoard 
 module.exports = function (gameBoard) {
+	console.log(render);
 	let board = gameBoard.board;
 	let orientation = gameBoard.lastOrientation;
 	let row, col;
