@@ -7,7 +7,7 @@ const Tree = require('./tree');
 const board = new Board ();
 const aiGame = new Tree(board);
 const game = aiGame.head.boardObj
-const gameOver = game.board.gameOver;
+
 
 game.fillRandomEmptySpace();
 //aplha beta
@@ -23,12 +23,13 @@ game.fillRandomEmptySpace();
 	// game.fillRandomEmptySpace();
 // }
 
-//minmax
-// while(!gameOver) {
 
-for (let i = 0; i < 10; i++) {
+//minmax
+while(!game.gameOver) {
+
 	game.hasWon();
 	game.hasLost();
+
 	console.log("before", aiGame.head.boardObj.board)
 	// render();
 	let bestMove = aiGame.minimax(aiGame.head, 3, true);
