@@ -60,7 +60,7 @@ class board {
 		return Math.max.apply( Math, all );
 	}
 	hasWon() {
-		if (this.highestTile() === 8) {
+		if (this.highestTile() === 32) {
 			this.gameOver = true;
 		}
 	}
