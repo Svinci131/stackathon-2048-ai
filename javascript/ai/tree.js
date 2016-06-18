@@ -57,6 +57,7 @@ class Tree {
 		}
 	}
 	minimax (node, depth, maximizingPlayer) {
+		
 		if (depth === 0 || node.boardObj.board.gameOver) {
 			return node; 
 		}

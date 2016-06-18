@@ -9,6 +9,7 @@ const absoluteDiff = utils.absoluteDiff;
 const clone = require('lodash.clone');
 
 class board {
+
 	constructor () {
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
 		this.lastOrientation = "horizontal";
@@ -16,6 +17,7 @@ class board {
 		this.gameOver = false; 
 		this.transposed; 
 	}
+
 	//O(1) = add 2 or 4 to a random emptysquare w 0
 	getEmptySpots() {
 		var emptySpots = [];
@@ -36,6 +38,7 @@ class board {
 		this.board[cell[0]][cell[1]] = twoOrFour();
 		this.gameOver = true;
 	}
+
 	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
 	update (orientation, direction) { 
 		// const lastBoard = clone(this.board);
@@ -49,6 +52,12 @@ class board {
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
 
 	}
+	hasWon() {
+		if (this.actualScore() === 8) {
+			this.gameOver = true;
+		}
+	}
+ 	//rewrite after stackathon
 	hasLost () {
 
 		let copy = clone(this.board);
@@ -101,7 +110,7 @@ class board {
 	actualScore () {
 		let all = getFlatArr(this.board);
 		return Math.max.apply( Math, all );
-	};
+	}
 	//o(n*n)
 	clusteredScore () {
 		let all = getFlatArr(this.board); 
