@@ -1,17 +1,17 @@
 'use strict'
 
-const chalk = require('chalk');
-const spies = require('chai-spies');
-const blue = chalk.blue;	
-const chai = require('chai');
+var chalk = require('chalk');
+var spies = require('chai-spies');
+var blue = chalk.blue;	
+var chai = require('chai');
 // const sinon = require("sinon");
-const expect = require('chai').expect;
-const board = require('../javascript/board.js');
+var expect = require('chai').expect;
+var board = require('../javascript/board.js');
 const swipe = board.swipe;
-const directions = require("../javascript/directions");
-const transpose = require('../javascript/utils').transpose;
-const Board = new board();
-const clone = require('lodash.clone');
+var directions = require("../javascript/directions");
+var transpose = require('../javascript/utils').transpose;
+var Board = new board();
+var clone = require('lodash.clone');
 
 // console.log(blue(board))
 describe("board", function (){
@@ -47,18 +47,21 @@ describe("hasLost", function(){
 		expect(testBoard.gameOver).to.be.false;
 	});
 });
-// describe("heuristic score", function(){
-// 	Board.board = [ [0,0,0,0],
-// 						[0,0,0,0],
-// 						[0,0,0,0],
-// 						[2048,256,128,0]];
-// 		let worseBoard = new board();
-// 		worseBoard.board = [[0,2048,0,0],
-// 							[0,256,0,0],
-// 							[0,128,0,0],
-// 						    [0,0,0,0]];
-// 		expect(Board.heuristicScore()).to.be.above(worseBoard.heuristicScore());
-// });
+
+describe("heuristic score", function(){
+	it ("gets a normalized over all score", function() {
+	Board.board = [ [0,0,0,0],
+						[0,0,0,0],
+						[0,0,0,0],
+						[2048,256,128,0]];
+		let worseBoard = new board();
+		worseBoard.board = [[0,2048,0,0],
+							[0,256,0,0],
+							[0,128,0,0],
+						    [0,0,0,0]];
+		expect(Board.heuristicScore()).to.be.above(worseBoard.heuristicScore());
+	});
+});
 describe("actual score", function (){
 	it ("sums all tiles", function() {
 		Board.board = [[0,0,0,0],
@@ -95,6 +98,8 @@ describe("clusteringScore", function (){
 						[4,2,2,0],
 						[128,2,2,0],
 						[4,2048,8,4]];
+		console.log(Board.actualScore(), Board.clusteredScore())
+		console.log(worseBoard.actualScore(), worseBoard.clusteredScore())
 		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
 	});
 	it ("works in a bunch of situations", function () {

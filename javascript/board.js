@@ -131,13 +131,21 @@ class board {
 		return clusteredScore;
 	}
 	//o(n)
+	//http://stats.stackexchange.com/questions/70553/how-to-verify-a-distribution-is-normalized
+	//http://stats.stackexchange.com/questions/10289/whats-the-difference-between-normalization-and-standardization
+
+	//normalize vs standardize?
 	heuristicScore () {
 		// console.log(this.clusteredScore());
 		let actualScore = this.actualScore();
-		let clusteredScore = 0//this.clusteredScore();
+		let clusteredScore = this.clusteredScore();
 		let numberOfEmptyCells = this.getEmptySpots().length;//o(n)
-		let score = (actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore);
-		return Math.max(score, Math.min(actualScore, 1));
+		//sv 
+		let score = Math.floor(((actualScore/clusteredScore)*10)*numberOfEmptyCells);
+		//console.log("scores", actualScore, clusteredScore, "final", score);
+		return score;
+		//let score = (actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore);
+		//return Math.max(score, Math.min(actualScore, 1));
 	}
 }
 

@@ -6,6 +6,14 @@ function twoOrFour () {
 	var random = Math.round(Math.random() * (2 - 1) + 1) ;
 	return options[random-1];
 }
+//http://stats.stackexchange.com/questions/10289/whats-the-difference-between-normalization-and-standardization
+//http://forums.macnn.com/89/macnn-lounge/360738/how-to-normalize-ratios/
+function standardize () {}
+function normalize () {
+	//let unitVector = X;
+
+}
+
 
 //O(n)
 //(arr[[], []]) => []
