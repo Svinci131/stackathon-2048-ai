@@ -52,9 +52,9 @@ class board {
 
 	}
 	hasWon() {
-		// if (this.actualScore() === 8) {
-		// 	this.gameOver = true;
-		// }
+		if (this.actualScore() === 8) {
+			this.gameOver = true;
+		}
 	}
  	//rewrite after stackathon
 	hasLost () {
