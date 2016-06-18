@@ -59,9 +59,18 @@ describe("hasLost", function(){
 // 						    [0,0,0,0]];
 // 		expect(Board.heuristicScore()).to.be.above(worseBoard.heuristicScore());
 // });
+describe("actual score", function (){
+	it ("sums all tiles", function() {
+		Board.board = [[0,0,0,0],
+						[4,2,2,0],//8
+						[128,2,2,0],//132
+						[4,4,8,4]];//20
 
-describe("actualScore", function (){
-	it ("has calcutlates the actualScore", function() {
+		expect(Board.actualScore()).to.equal(160);
+	});
+});
+describe("highestTile", function (){
+	it ("has gets the highest tile", function() {
 		Board.board = [[0,2,2,0],
 						[4,2,2,0],
 						[128,2,2,0],
@@ -71,7 +80,7 @@ describe("actualScore", function (){
 						[4,2,2,0],
 						[128,2,2,0],
 						[4,2,8,4]];
-		expect(Board.actualScore()).to.be.above(worseBoard.actualScore());
+		expect(Board.highestTile()).to.be.above(worseBoard.highestTile());
 	});
 });
 
@@ -199,10 +208,6 @@ describe("update", function () {
 		Board.update("vertical", "down");
 		// expect(transposedCall).to.have.been.called;
 	});
-	it("inserts random zero", function () {
-		// expect(this.fillRandomEmptySpace).to.have.been.called;
-
-	});
 
 });
 
@@ -214,27 +219,4 @@ describe('fillRandomEmptySpace', function () {
 					  [0,0,0,0],
 					  [0,0,0,0],
 					  [0,0,0,0]];
-	
-	it('it changes removes one index from empty spots', function () {
-		Board.fillRandomEmptySpace();
-		let remainingEmptySpots = Board.emptyspots.reduce((a,b) => {
-			return a.concat(b);
-		});
-		expect(remainingEmptySpots.length).to.equal(15);
-
-	});
-	//need a way to test this- but it works 
-	it('it changes one zero value in board to two or four', function () {
-		// let newBoard = Board.board.reduce((a,b) => {
-		// 	return a.concat(b);
-		// });
-		// console.log(newBoard);
-		// expect(Board.board.indexOf(4))).to.be.true; || 
-		// expect(Board.board.indexOf(2))).to.be.true; || 
-	});
-	it('it updates gameOver if there are no moves left', function () {
-		Board.emptyspots = [ [4],[],[],[]];
-		Board.fillRandomEmptySpace();
-		expect(Board.gameOver).to.be.true;
-	});
 });
