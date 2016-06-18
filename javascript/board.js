@@ -56,7 +56,7 @@ class board {
 		return Math.max.apply( Math, all );
 	}
 	hasWon() {
-		if (this.highestTile() === 8) {
+		if (this.highestTile() === 2048) {
 			this.gameOver = true;
 		}
 	}
@@ -133,7 +133,6 @@ class board {
 	//o(n)
 	//http://stats.stackexchange.com/questions/70553/how-to-verify-a-distribution-is-normalized
 	//http://stats.stackexchange.com/questions/10289/whats-the-difference-between-normalization-and-standardization
-
 	//normalize vs standardize?
 	heuristicScore () {
 		// console.log(this.clusteredScore());
@@ -142,10 +141,7 @@ class board {
 		let numberOfEmptyCells = this.getEmptySpots().length;//o(n)
 		//sv 
 		let score = Math.floor(((actualScore/clusteredScore)*10)*numberOfEmptyCells);
-		//console.log("scores", actualScore, clusteredScore, "final", score);
 		return score;
-		//let score = (actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore);
-		//return Math.max(score, Math.min(actualScore, 1));
 	}
 }
 

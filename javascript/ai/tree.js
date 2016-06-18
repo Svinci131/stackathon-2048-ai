@@ -30,7 +30,7 @@ class Tree {
 		return a;
 	}
 	alphaBeta (node, depth, a, b, maximizingPlayer) {
-		if (depth === 0 || node.boardObj.board.gameOver) {
+		if (depth === 0) {
 			return node; 
 		}
 		if (maximizingPlayer) {  //ai 
@@ -48,6 +48,7 @@ class Tree {
 			node.children = createAllPossibleRandomStates(node);
 			for(let i = 0; i < node.children.length; i++) {
 				let child = node.children[i];
+				console.log("oponent move", depth, child.boardObj.board);
 				b = this.min(b, this.alphaBeta(child, depth-1, a, b, true));
 				if (b <= a) {
 					break;
@@ -57,7 +58,7 @@ class Tree {
 		}
 	}
 	minimax (node, depth, maximizingPlayer) {
-		if (depth === 0 || node.boardObj.board.gameOver) {
+		if (depth === 0) {
 			return node; 
 		}
 		

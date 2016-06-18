@@ -34,7 +34,7 @@ while(!game.gameOver) {
 	game.hasWon();
 	game.hasLost();
 
-	console.log("before", aiGame.head.boardObj.board)
+	console.log("beforep1/ after Random", aiGame.head.boardObj.board)
 	// render();
 	let bestMove = aiGame.minimax(aiGame.head, 3, true);
 	// console.log("bestMove", game.)
@@ -52,7 +52,6 @@ while(!game.gameOver) {
 	game.update(orientation, direction);
 	console.log("after playre one",aiGame.head.boardObj.board);
 	game.fillRandomEmptySpace();
-	console.log("after Random",aiGame.head.boardObj.board);
 	counter++
 } 
 
