@@ -3,22 +3,26 @@
 
 const Board = require('./board');
 const Tree = require('./ai/tree');
-const board = new Board(); 
+const humanGame = new Board();
 let aiMode = false;
-//ai stuff
-const aiGame = new Tree(board);
-const game = aiGame.head.boardObj
-const gameOver =  game.board.gameOver;
 
 $('#ai').on("click", function() {
-	// aiMode = !aiMode;
+	aiMode = true;
+	humanGame.clearBoard()
+	render(humanGame.board);
+	let board = new Board();
+	board.fillRandomEmptySpace();
+	let aiGame = new Tree(board);
+	let game = aiGame.head.boardObj;
 	launchAi();
 });
 
-function start () {
-	board.fillRandomEmptySpace();
-	render(board);
-}
+$('#humanGame').on("click", function() {
+	aiMode = false;
+	humanGame.fillRandomEmptySpace();
+	render(humanGame);
+});
+
 // //drawBoard 
 function render (gameBoard) {
 	let board = gameBoard.board;
@@ -50,61 +54,56 @@ function render (gameBoard) {
 	}
 }
 
-function launchAi () {
-	while(!game.gameOver) {
+function launchAi (aiGame) {
+	let counter = 0;
+	console.log(game.board)
+	// while(!game.gameOver) {
+	// 	game.hasWon();
+	// 	game.hasLost();
 
-			game.hasWon();
-			game.hasLost();
-
-			console.log("before", aiGame.head.boardObj.board)
-			render(game);
-			
-				let bestMove = aiGame.minimax(aiGame.head, 3, true);
-				let orientation = bestMove.boardObj.lastOrientation;
-				let direction = bestMove.boardObj.lastDirection;
-			
-			game.update(orientation, direction);
-
-
-		// setTimeout(function() {
-			game.fillRandomEmptySpace();
-			render(game);
-		// }, 500);
-	
-	} 
+		// render(game);
+		// let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
+		// let orientation = bestMove.boardObj.lastOrientation;
+		// let direction = bestMove.boardObj.lastDirection;
+		// game.update(orientation, direction);
+		// render(game.board);
+		// game.fillRandomEmptySpace();
+		// counter++;
+	// }
+	return counter;
 }
-start();
+
+
 //human user 
 $("body").keydown(e => {
-	console.log(aiMode)
 	if (!aiMode) {
 		if(e.keyCode === 37) { //left
-			board.update ("horizontal", "left"); 
-			render(board);
+			humanGame.update ("horizontal", "left"); 
+			render(humanGame);
 
 		}
 		else if(e.keyCode === 39) { //right
-			board.update ("horizontal", "right");
-			render(board);
+			humanGame.update ("horizontal", "right");
+			render(humanGame);
 
 		}
 		else if(e.keyCode === 38) { //up
-			board.update ("vertical", "up");
-			render(board);
+			humanGame.update ("vertical", "up");
+			render(humanGame);
 
 		}
 		else if(e.keyCode === 40) { //up
-			board.update ("vertical", "down");
-			render(board);
+			humanGame.update ("vertical", "down");
+			render(humanGame);
 
 		}
-	 	board.hasLost();
-	 	if (board.gameOver) {
+	 	humanGame.hasLost();
+	 	if (humanGame.gameOver) {
 	 		alert("gameOver");
-	 		Window.reload();
+	 		//humanGame.clearBoard()
 	 	}
-		board.fillRandomEmptySpace();
-		render(board);
+		humanGame.fillRandomEmptySpace();
+		render(humanGame);
 	}
 });
 	

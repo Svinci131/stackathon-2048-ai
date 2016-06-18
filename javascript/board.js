@@ -17,7 +17,9 @@ class board {
 		this.gameOver = false; 
 		this.transposed; 
 	}
-
+	clearBoard () {
+		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
+	}
 	//O(1) = add 2 or 4 to a random emptysquare w 0
 	getEmptySpots() {
 		var emptySpots = [];
