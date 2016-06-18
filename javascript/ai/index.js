@@ -20,16 +20,12 @@ let lastLastMove;
 while(!game.gameOver) {
 	game.hasWon();
 	game.hasLost();
-	console.log("before/ after Random", aiGame.head.boardObj.board);
-	let bestMove = aiGame.alphaBeta(aiGame.head, 3, -Infinity, Infinity, true);
-	console.log("best", bestMove);
-	if(bestMove === Infinity) {
-		console.log("count",counter)
-		break;
-	}
+
+	console.log("before/ after Random", aiGame.head);
+	let bestMove = aiGame.alphaBeta(aiGame.head, 7, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
-	//console.log("move", orientation, direction, bestMove.score);
+	console.log("move", orientation, direction, bestMove.score);
 	game.update(orientation, direction);
 	//console.log("after playre one",aiGame.head.boardObj.board);
 	game.fillRandomEmptySpace();
