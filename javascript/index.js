@@ -10,11 +10,14 @@ let aiMode = false;
 
 $('#ai').on("click", function() {
 	aiMode = true;
-	humanGame.clearBoard()
+	humanGame.clearBoard();
 	render(humanGame);
 	let boardObj = new Board();
+	let aiGame = new Tree(boardObj);
+	let game = aiGame.head.boardObj;
+	let counter = 0;
 	boardObj.fillRandomEmptySpace();
-	launchAi(boardObj);
+	launchAi(aiGame, game , counter);
 });
 
 $('#humanGame').on("click", function() {
@@ -27,7 +30,6 @@ $('#humanGame').on("click", function() {
 function render (gameBoard) {
 	let board = gameBoard.board;
 	let orientation = gameBoard.lastOrientation;
-	console.log("board", board)
 	for (let i = 0; i<4; i++) {
 		for (let j = 0; j<4; j++) { 
 			let row, col;
@@ -54,56 +56,35 @@ function render (gameBoard) {
 	}
 }
 
-function delay () {
-	setTimeOut(function() {
-
-	}, 1000);
-}
-
-function checkAIGameOver (game) {
-	console.log("check status");
-	return new Promise ((resolve, reject)=> {
-		game.hasWon();
-		game.hasLost();
-		render(game);
-	});
-}
-
 function makeBestMove(aiGame, game) {
-	// return new Promise ((resolve, reject)=> {
-		console.log("playerOne")
-		let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
-		let orientation = bestMove.boardObj.lastOrientation;
-		let direction = bestMove.boardObj.lastDirection;
-		console.log("bestMove", orientation, direction)
-		game.update(orientation, direction);
-		render(game);
-		// resolve("hi")
-	// });
+	let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
+	let orientation = bestMove.boardObj.lastOrientation;
+	let direction = bestMove.boardObj.lastDirection;
+	game.update(orientation, direction);
+	render(game);
+	console.log("ai Move", orientation, direction)
+}
 
+function checkWin (game) {
+	game.hasWon();
+	game.hasLost();
 }
 
 
-
-function launchAi (boardObj) {
-	let aiGame = new Tree(boardObj);
-	let game = aiGame.head.boardObj;
-	let counter = 0;
-
-	console.log(game)
-	while(!game.gameOver) {
-
-		console.log("check")
-		game.hasWon();
-		game.hasLost();
-		render(game);
-		makeBestMove(aiGame, game);
-		render(game);
+function launchAi (aiGame, game, counter) {
+	checkWin.bind(this);
+	render(game);
+	setTimeout(makeBestMove, 2000, aiGame, game)
+	setTimeout(function () {
+		console.log("oponent");
 		game.fillRandomEmptySpace();
 		counter++;
+		render(game);
+	}, 5000, aiGame, game, counter);
 
-	}
-	return counter;
+	// if (!game.gameOver) {
+	// 	launchAi (aiGame, game, counter);
+	// }
 }
 
 
