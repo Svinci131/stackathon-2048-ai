@@ -76,22 +76,23 @@ function checkWin (game) {
 }
 
 function launchAi (aiGame, game, counter) {
-	checkWin.bind(this);
+	// checkWin.bind(this);
 	render(game);
-	setTimeout(makeBestMove, 400, aiGame, game)
+	setTimeout(makeBestMove, 100, aiGame, game)
 	setTimeout(function () {
 		// console.log("oponent");
 		game.fillRandomEmptySpace();
 		counter++;
 		render(game);
-	}, 900, aiGame, game, counter);
+	}, 300, aiGame, game, counter);
 	setTimeout(function () {
-		// console.log(game.gameOver);
-		// console.log("make another move")
+		game.hasWon();
+		game.hasLost();
+		console.log("gameover", game.gameOver);
 		if (!game.gameOver) {
 			launchAi (aiGame, game, counter);
 		}
-	}, 1500, aiGame, game, counter);
+	}, 700, aiGame, game, counter);
 }
 
 
