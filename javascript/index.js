@@ -9,12 +9,10 @@ let aiMode = false;
 $('#ai').on("click", function() {
 	aiMode = true;
 	humanGame.clearBoard()
-	render(humanGame.board);
-	let board = new Board();
-	board.fillRandomEmptySpace();
-	let aiGame = new Tree(board);
-	let game = aiGame.head.boardObj;
-	launchAi();
+	render(humanGame);
+	let boardObj = new Board();
+	boardObj.fillRandomEmptySpace();
+	launchAi(boardObj);
 });
 
 $('#humanGame').on("click", function() {
@@ -27,7 +25,7 @@ $('#humanGame').on("click", function() {
 function render (gameBoard) {
 	let board = gameBoard.board;
 	let orientation = gameBoard.lastOrientation;
-
+	console.log("board", board)
 	for (let i = 0; i<4; i++) {
 		for (let j = 0; j<4; j++) { 
 			let row, col;
@@ -54,22 +52,24 @@ function render (gameBoard) {
 	}
 }
 
-function launchAi (aiGame) {
+function launchAi (boardObj) {
+	let aiGame = new Tree(boardObj);
+	let game = aiGame.head.boardObj;
 	let counter = 0;
-	console.log(game.board)
-	// while(!game.gameOver) {
-	// 	game.hasWon();
-	// 	game.hasLost();
+	console.log(game)
+	while(!game.gameOver) {
+		game.hasWon();
+		game.hasLost();
 
-		// render(game);
-		// let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
-		// let orientation = bestMove.boardObj.lastOrientation;
-		// let direction = bestMove.boardObj.lastDirection;
-		// game.update(orientation, direction);
-		// render(game.board);
-		// game.fillRandomEmptySpace();
-		// counter++;
-	// }
+		render(game);
+		let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
+		let orientation = bestMove.boardObj.lastOrientation;
+		let direction = bestMove.boardObj.lastDirection;
+		game.update(orientation, direction);
+		render(game);
+		game.fillRandomEmptySpace();
+		counter++;
+	}
 	return counter;
 }
 
