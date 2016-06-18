@@ -70,13 +70,7 @@ function makeBestMove(aiGame, game) {
 	}
 }
 
-function checkWin (game) {
-	game.hasWon();
-	game.hasLost();
-}
-
 function launchAi (aiGame, game, counter) {
-	// checkWin.bind(this);
 	render(game);
 	setTimeout(makeBestMove, 100, aiGame, game)
 	setTimeout(function () {
@@ -91,6 +85,9 @@ function launchAi (aiGame, game, counter) {
 		console.log("gameover", game.gameOver);
 		if (!game.gameOver) {
 			launchAi (aiGame, game, counter);
+		}
+		else {
+			alert("We've reached"+ game.highestTile()+"in"+counter+"moves")
 		}
 	}, 700, aiGame, game, counter);
 }
