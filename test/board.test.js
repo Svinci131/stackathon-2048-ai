@@ -90,6 +90,7 @@ describe("actual score", function (){
 		expect(Board.actualScore()).to.equal(160);
 	});
 });
+
 describe("highestTile", function (){
 	it ("has gets the highest tile", function() {
 		Board.board = [[0,2,2,0],
@@ -132,6 +133,16 @@ describe("clusteringScore", function (){
 						[0,128,0,128]];
 		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
 	});
+	it ("shouldn't get 0 unless all zeros", function () {
+		let Board06 = new board();
+		Board06.board = [ [ 0, 0, 0, 0 ],
+		  				[ 0, 0, 0, 2 ], 
+		  				[ 0, 0, 0, 4 ], 
+		  				[ 0, 0, 4, 4 ] ]
+		console.log(Board06.clusteredScore());
+		expect(Board.clusteredScore()).to.not.equal(0);
+
+	})
 	it ("has gets lower score when the high tiles are on sides or corners ", function() {
 		Board.board = [ [0,0,0,0],
 						[0,0,0,0],
@@ -142,6 +153,7 @@ describe("clusteringScore", function (){
 							[0,256,0,0],
 							[0,128,0,0],
 						    [0,0,0,0]];
+
 		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
 	});
 });

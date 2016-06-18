@@ -34,8 +34,8 @@ while(!game.gameOver) {
 	counter++;
 }
 
-// let counter = 0;
-// // minmax
+
+// minmax
 // while(!game.gameOver) {
 
 // 	game.hasWon();
@@ -44,7 +44,7 @@ while(!game.gameOver) {
 // 	//console.log("beforep1/ after Random", aiGame.head.boardObj.board)
 // 	// render();
 // 	let bestMove = aiGame.minimax(aiGame.head, 3, true);
-// 	// console.log("bestMove", game.)
+// 	// console.log("bestMove", bestMove.boardObj.board);
 // 	// co
 // 	if(bestMove === Infinity) {
 // 		console.log("count",counter)
@@ -57,6 +57,7 @@ while(!game.gameOver) {
 // 	let direction = bestMove.boardObj.lastDirection;
 // 	//console.log("move", orientation, direction);
 // 	game.update(orientation, direction);
+// 	debugger
 // 	//console.log("after playre one",aiGame.head.boardObj.board);
 // 	game.fillRandomEmptySpace();
 // 	counter++

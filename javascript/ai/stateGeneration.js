@@ -11,8 +11,6 @@ function createDelibrateState (currNodeBoard, orientation, direction) {
 	board.update(orientation, direction);
 
 	let node = new Node(board);
-	// node.boardObj.hasLost()
-	// node.boardObj.hasWon()
 	return node;
 }
 
