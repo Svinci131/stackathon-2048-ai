@@ -1,14 +1,13 @@
-const chalk = require('chalk');
-const spies = require('chai-spies');
-const blue = chalk.blue;	
-const chai = require('chai');
-const sinon = require("sinon");
-const expect = require('chai').expect;
-const stateGen = require('../javascript/ai/stateGeneration');
-const Board = require('../javascript/board.js');
-const board = new Board();
-const Node = require('../javascript/ai/node');
-const node = new Node (board);
+var chalk = require('chalk');
+var spies = require('chai-spies');
+var blue = chalk.blue;	
+var chai = require('chai');
+var expect = require('chai').expect;
+var stateGen = require('../javascript/ai/stateGeneration');
+var Board = require('../javascript/board.js');
+var board = new Board();
+var Node = require('../javascript/ai/node');
+var node = new Node (board);
 
 describe("createDelibrateState", function (){
 	var testBoard = [[0,0,0,0],
@@ -72,13 +71,16 @@ describe("createRandomState", function (){
 	});
 });
 describe("createAllPossibleRandomStates", function (){
-	var possibleStates = stateGen.createAllPossibleRandomStates(node);
+	var board01 = new Board();
+	var node01 = new Node (board01);
+	var possibleStates = stateGen.createAllPossibleRandomStates(node01);
 
 	it("does not affect the parent node", function(){
-		console.log(node.boardObj.board);
-		expect(node.boardObj.board).to.not.eql(possibleStates[0].boardObj.board);
+		//console.log(node01.boardObj.board);
+		expect(node01.boardObj.board).to.not.eql(possibleStates[0].boardObj.board);
 	});
-	// it("gets create a new node with two and four for everypossible empty space", function() {
-		
-	// });
+	it("gets create a new node with two and four for everypossible empty space", function() {
+		//console.log(possibleStates);
+		expect(possibleStates.length).to.equal(32);
+	});
 });

@@ -55,6 +55,15 @@ describe("hasLost", function(){
 		testBoard.hasLost();
 		expect(testBoard.gameOver).to.be.false;
 	});
+	it("works here too", function() {
+		var Board2 = new board();
+		Board2.board =[ [ 4, 16, 4,  4 ],
+					    [ 2, 4,  4,  4 ],
+						[ 4, 2,  64, 4 ],
+						[ 2, 4,  8,  32 ] ];
+		Board2.hasLost();
+		expect(Board2.gameOver).to.be.false;
+	});
 });
 
 describe("heuristic score", function(){

@@ -3,18 +3,15 @@
 const Board = require("../board");
 const Node = require("./node");
 const clone = require('lodash.clone');
-
+const cloneDeep = require('clone-deep');
 //(boardArr) => nodeobj
 function createDelibrateState (currNodeBoard, orientation, direction) {
 	let board = new Board (); 
 	board.board = clone(currNodeBoard);
 	board.update(orientation, direction);
 	let node = new Node(board);
-	node.boardObj.hasLost()
-	node.boardObj.hasWon()
-	// if (node.boardObj.hasLost()) {
-
-	// }
+	// node.boardObj.hasLost()
+	// node.boardObj.hasWon()
 	return node;
 }
 
@@ -32,7 +29,7 @@ function createAllPossibleDelibrateStates(currNode) {
 
 function createRandomState (currNodeBoard, rowIndex, colIndex, val) {
 	let board = new Board();//create board
-	board.board = clone(currNodeBoard); //clone parentboard
+	board.board = cloneDeep(currNodeBoard); //clone parentboard
 	board.board[rowIndex][colIndex] = val;//set space in new board to val 
 	let node = new Node(board);
 	return node;
@@ -48,9 +45,12 @@ function createAllPossibleRandomStates(currNode) {
 		let colIndex = coords[1];
 		for(let k = 0; k < 2; k++) {
 			let possibleState = createRandomState(board,rowIndex, colIndex, options[k]);
+				console.log(possibleState.boardObj.board)
 			possibleStates.push(possibleState);
 		}
 	});
+
+	
 	return possibleStates;
 }
 

@@ -11,49 +11,54 @@ const game = aiGame.head.boardObj
 
 	
 game.fillRandomEmptySpace();
-
-//let bestMove = aiGame.alphaBeta(aiGame.head, 8, -Infinity, Infinity, true);
-
-//aplha beta
-// while(!game.gameOver) {
-// 	console.log("before", aiGame.head.boardObj.board);
-// 	let bestMove = aiGame.alphaBeta(aiGame.head, 3, -Infinity, Infinity, true);
-// 	console.log("best", bestMove);
-// 	let orientation = bestMove.boardObj.lastOrientation;
-// 	let direction = bestMove.boardObj.lastDirection;
-// 	console.log("move", orientation, direction);
-// 	game.update(orientation, direction);
-// 	console.log("after playre one",aiGame.head.boardObj.board);
-// 	game.fillRandomEmptySpace();
-// }
-
 let counter = 0;
-// minmax
+//let bestMove = aiGame.alphaBeta(aiGame.head, 8, -Infinity, Infinity, true);
+let lastLastMove;
+//aplha beta
 while(!game.gameOver) {
-
-	game.hasWon();
-	game.hasLost();
-
-	console.log("beforep1/ after Random", aiGame.head.boardObj.board)
-	// render();
-	let bestMove = aiGame.minimax(aiGame.head, 3, true);
-	// console.log("bestMove", game.)
-	// co
+	//console.log("before/ after Random", aiGame.head.boardObj.board);
+	let bestMove = aiGame.alphaBeta(aiGame.head, 3, -Infinity, Infinity, true);
+	//console.log("best", bestMove);
 	if(bestMove === Infinity) {
 		console.log("count",counter)
 		break;
 	}
-	// console.log(bestMove)
-
-	//debugger
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
-	console.log("move", orientation, direction);
+	//console.log("move", orientation, direction, bestMove.score);
 	game.update(orientation, direction);
-	console.log("after playre one",aiGame.head.boardObj.board);
+	//console.log("after playre one",aiGame.head.boardObj.board);
 	game.fillRandomEmptySpace();
-	counter++
-} 
+	counter++;
+}
+
+// let counter = 0;
+// // minmax
+// while(!game.gameOver) {
+
+// 	game.hasWon();
+// 	game.hasLost();
+
+// 	//console.log("beforep1/ after Random", aiGame.head.boardObj.board)
+// 	// render();
+// 	let bestMove = aiGame.minimax(aiGame.head, 3, true);
+// 	// console.log("bestMove", game.)
+// 	// co
+// 	if(bestMove === Infinity) {
+// 		console.log("count",counter)
+// 		break;
+// 	}
+// 	// console.log(bestMove)
+
+// 	//debugger
+// 	let orientation = bestMove.boardObj.lastOrientation;
+// 	let direction = bestMove.boardObj.lastDirection;
+// 	//console.log("move", orientation, direction);
+// 	game.update(orientation, direction);
+// 	//console.log("after playre one",aiGame.head.boardObj.board);
+// 	game.fillRandomEmptySpace();
+// 	counter++
+// } 
 
 
 
