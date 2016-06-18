@@ -42,9 +42,6 @@ class Tree {
 					break;
 				}
 			}
-			if (depth === 3) {
-				console.log(node.score, a)
-			}
 			return a;
 		}
 		else {

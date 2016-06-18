@@ -11,7 +11,7 @@ const swipe = board.swipe;
 const directions = require("../javascript/directions");
 const transpose = require('../javascript/utils').transpose;
 const Board = new board();
-
+const clone = require('lodash.clone');
 
 // console.log(blue(board))
 describe("board", function (){
@@ -20,18 +20,45 @@ describe("board", function (){
 	});
 });
 
-describe("heuristic score", function(){
-	Board.board = [ [0,0,0,0],
-						[0,0,0,0],
-						[0,0,0,0],
-						[2048,256,128,0]];
-		let worseBoard = new board();
-		worseBoard.board = [[0,2048,0,0],
-							[0,256,0,0],
-							[0,128,0,0],
-						    [0,0,0,0]];
-		expect(Board.heuristicScore()).to.be.above(worseBoard.heuristicScore());
+describe("hasLost", function(){
+	it ("doesn't alter board", function() {
+		var testBoard = new board();
+		var originalBoard = clone(testBoard);
+		testBoard.hasLost();
+		expect(testBoard.board).to.eql(originalBoard.board);
+	});
+	it ("fires if there are no next moves", function() {
+		var testBoard = new board();
+		testBoard.board = [ [4,2,4,2],
+						    [2,4,2,4],
+						    [4,2,4,2],
+						    [2,4,2,4]];
+		testBoard.hasLost();
+		expect(testBoard.gameOver).to.be.true;
+	});
+	it ("doesn't firee if there are", function() {
+		var testBoard = new board();
+		testBoard.board = [ [4,2,4,2],
+						    [4,4,2,4],
+						    [4,2,4,2],
+						    [2,4,2,4]];
+		testBoard.hasLost();
+		// console.log("gameOver", testBoard.gameOver);
+		expect(testBoard.gameOver).to.be.false;
+	});
 });
+// describe("heuristic score", function(){
+// 	Board.board = [ [0,0,0,0],
+// 						[0,0,0,0],
+// 						[0,0,0,0],
+// 						[2048,256,128,0]];
+// 		let worseBoard = new board();
+// 		worseBoard.board = [[0,2048,0,0],
+// 							[0,256,0,0],
+// 							[0,128,0,0],
+// 						    [0,0,0,0]];
+// 		expect(Board.heuristicScore()).to.be.above(worseBoard.heuristicScore());
+// });
 
 describe("actualScore", function (){
 	it ("has calcutlates the actualScore", function() {
