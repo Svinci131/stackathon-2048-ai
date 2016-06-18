@@ -70,21 +70,23 @@ function checkWin (game) {
 	game.hasLost();
 }
 
-
 function launchAi (aiGame, game, counter) {
 	checkWin.bind(this);
 	render(game);
-	setTimeout(makeBestMove, 2000, aiGame, game)
+	setTimeout(makeBestMove, 400, aiGame, game)
 	setTimeout(function () {
 		console.log("oponent");
 		game.fillRandomEmptySpace();
 		counter++;
 		render(game);
-	}, 5000, aiGame, game, counter);
-
-	// if (!game.gameOver) {
-	// 	launchAi (aiGame, game, counter);
-	// }
+	}, 900, aiGame, game, counter);
+	setTimeout(function () {
+		console.log(game.gameOver);
+		console.log("make another move")
+		if (!game.gameOver) {
+			launchAi (aiGame, game, counter);
+		}
+	}, 1500, aiGame, game, counter);
 }
 
 
