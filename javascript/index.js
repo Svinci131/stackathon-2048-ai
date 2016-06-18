@@ -55,14 +55,19 @@ function render (gameBoard) {
 		}
 	}
 }
-
+//doesn't end right on win 
 function makeBestMove(aiGame, game) {
 	let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
 	game.update(orientation, direction);
 	render(game);
-	console.log("ai Move", orientation, direction)
+	if (direction === "left") {
+		console.log("ai Move", orientation, direction)
+	}
+	else if (direction === "right") {
+		console.log("ai Move", orientation, direction)
+	}
 }
 
 function checkWin (game) {
@@ -75,14 +80,14 @@ function launchAi (aiGame, game, counter) {
 	render(game);
 	setTimeout(makeBestMove, 400, aiGame, game)
 	setTimeout(function () {
-		console.log("oponent");
+		// console.log("oponent");
 		game.fillRandomEmptySpace();
 		counter++;
 		render(game);
 	}, 900, aiGame, game, counter);
 	setTimeout(function () {
-		console.log(game.gameOver);
-		console.log("make another move")
+		// console.log(game.gameOver);
+		// console.log("make another move")
 		if (!game.gameOver) {
 			launchAi (aiGame, game, counter);
 		}

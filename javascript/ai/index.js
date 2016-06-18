@@ -21,12 +21,11 @@ while(!game.gameOver) {
 	game.hasWon();
 	game.hasLost();
 
-	console.log("before/ after Random", aiGame.head.boardObj);
-
+	//console.log("before/ after Random", aiGame.head.boardObj);
 	let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
-
+	console.log("before/ after Random", aiGame.head.boardObj);
 	console.log("move", orientation, direction, bestMove.score);
 	game.update(orientation, direction);
 	game.fillRandomEmptySpace();

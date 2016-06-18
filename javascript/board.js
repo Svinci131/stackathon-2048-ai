@@ -146,7 +146,8 @@ class board {
 		let clusteredScore = this.clusteredScore();
 		let numberOfEmptyCells = this.getEmptySpots().length;//o(n)
 		//sv 
-		let score = (actualScore-clusteredScore)*10
+		let score = (actualScore-clusteredScore)*10;
+		// console.log("here", this.lastDirection, score);
 		//Math.floor(((actualScore/clusteredScore)*10));
 		return score;
 	}

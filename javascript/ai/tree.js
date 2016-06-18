@@ -21,13 +21,8 @@ class Tree {
 		return a;
 	}
 	max (a, b) {
-
-		if (a instanceof Node) {
-			a = a.score > b.score ? a : b;
-		}
-		else {
-			a = a > b.score ? a : b;
-		}
+		if (a instanceof Node) a = a.score > b.score ? a : b;
+		else a = a > b.score ? a : b;
 		return a;
 	}
 	alphaBeta (node, depth, a, b, maximizingPlayer) {
@@ -37,7 +32,6 @@ class Tree {
 		}
 		if (maximizingPlayer) {  //ai 
 			node.children = createAllPossibleDelibrateStates(node);
-			
 			for(let i = 0; i < node.children.length; i++) {
 				let child = node.children[i];
 				a = this.max(a, this.alphaBeta(child, depth-1, a, b, false));
@@ -64,46 +58,29 @@ class Tree {
 		}
 	}
 	minimax (node, depth, maximizingPlayer) {
-		
 		if (depth === 0) {
 			return node; 
 		}
-		
 		if (maximizingPlayer) {  //ai 
-			console.log("playerone")
-			
 			node.children = createAllPossibleDelibrateStates(node);
-			if (node.marker) {
-				console.log("sent back", node.children)
-			}
 			let best = -Infinity;
 			node.children.forEach(child => {
 				let val = this.minimax(child, depth-1, false); 
 
 				if (best instanceof Node) {
-
 					best = best.score > val.score ? best : val;
 				}
 				else {
-					if (best === Infinity) {
-						console.log(best, val);
-					}
 					best = best > val.score ? best : val;
 				}
 		
 			});
-
 			return best;
 		}
 		
 		else { //normal comp
-			console.log("playerTwo");
-			//get all 
 			node.children = createAllPossibleRandomStates(node);
 			let best = Infinity;
-			//if there are no possible places it could put a 2 or 4
-			
-			// console.log(depth, "p2", node);
 			node.children.forEach(child => {
 				let val = this.minimax(child, depth - 1, true);
 				//we want to assume the worst
@@ -114,12 +91,12 @@ class Tree {
 					best = best > val.score ? val : best;
 				}			
 			});
+			//if there are no open squares send back curr board
 			if (!node.children.length) {
 				node.children = null;
 				node.marker = "no random";
 				best = this.minimax(node, depth - 1, true);
 			}
-			console.log("best", best.boardObj.board);
 			return best;
 		}
 	}
