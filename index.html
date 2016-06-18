@@ -4,40 +4,59 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0;'>
     <title ></title>
     <link rel='stylesheet' href='styles/reset.css'>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <link rel='stylesheet' href='styles/main.css'>
 </head>
 <body>
-	<button id="ai">AutoPlay</button>
-	<button id="humanGame">Play as Human</button>
-	
 	<div class="container">
-		<div id="0"class="row">
-			<div data-cellid="0-0" class="cell empty" > </div>
-			<div data-cellid="0-1" class="cell empty" > </div>
-			<div data-cellid="0-2" class="cell empty" > </div>
-			<div data-cellid="0-3" class="cell empty" > </div>
-			
+		<div class="page-header">
+		<h1>2048 Alpha-Beta Implimentation<small> Samantha Vinci</small></h1>
 		</div>
-		<div id="1"class="row">
-			<div data-cellid="1-0" class="cell empty"></div>
-			<div data-cellid="1-1" class="cell empty"></div>
-			<div data-cellid="1-2" class="cell empty"></div>
-			<div data-cellid="1-3" class="cell empty"></div>
-			
-		</div>
-		<div id="2"class="row">
-			<div data-cellid="2-0" class="cell empty"></div>
-			<div data-cellid="2-1" class="cell empty"></div>
-			<div data-cellid="2-2" class="cell empty"></div>
-			<div data-cellid="2-3" class="cell empty"></div>
-		
-		</div>
-		<div id="3"class="row">
-			<div data-cellid="3-0" class="cell empty"></div>
-			<div data-cellid="3-1" class="cell empty"></div>
-			<div data-cellid="3-2" class="cell empty"></div>
-			<div data-cellid="3-3" class="cell empty"></div>
-		
+		<button class="btn btn-primary" id="ai">AutoPlay</button>
+		<button class="btn btn-default" id="humanGame">Play as Human</button>
+	
+	
+		<div class="row">
+			<div  class="col-md-2">
+				<h5>moves</h5>
+				<ul id="aiMoves"></ul>
+			</div>
+			<div class="col-md-8">
+				<div class="board-container">
+					<div id="0"class="board-row">
+						<div data-cellid="0-0" class="cell empty" > </div>
+						<div data-cellid="0-1" class="cell empty" > </div>
+						<div data-cellid="0-2" class="cell empty" > </div>
+						<div data-cellid="0-3" class="cell empty" > </div>
+						
+					</div>
+					<div id="1"class="board-row">
+						<div data-cellid="1-0" class="cell empty"></div>
+						<div data-cellid="1-1" class="cell empty"></div>
+						<div data-cellid="1-2" class="cell empty"></div>
+						<div data-cellid="1-3" class="cell empty"></div>
+						
+					</div>
+					<div id="2"class="board-row">
+						<div data-cellid="2-0" class="cell empty"></div>
+						<div data-cellid="2-1" class="cell empty"></div>
+						<div data-cellid="2-2" class="cell empty"></div>
+						<div data-cellid="2-3" class="cell empty"></div>
+					
+					</div>
+					<div id="3"class="board-row">
+						<div data-cellid="3-0" class="cell empty"></div>
+						<div data-cellid="3-1" class="cell empty"></div>
+						<div data-cellid="3-2" class="cell empty"></div>
+						<div data-cellid="3-3" class="cell empty"></div>
+					
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 

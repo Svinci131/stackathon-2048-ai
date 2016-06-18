@@ -4,6 +4,8 @@
 const Board = require('./board');
 const Tree = require('./ai/tree');
 const humanGame = new Board();
+
+
 let aiMode = false;
 
 $('#ai').on("click", function() {
@@ -52,23 +54,54 @@ function render (gameBoard) {
 	}
 }
 
+function delay () {
+	setTimeOut(function() {
+
+	}, 1000);
+}
+
+function checkAIGameOver (game) {
+	console.log("check status");
+	return new Promise ((resolve, reject)=> {
+		game.hasWon();
+		game.hasLost();
+		render(game);
+	});
+}
+
+function makeBestMove(aiGame, game) {
+	// return new Promise ((resolve, reject)=> {
+		console.log("playerOne")
+		let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
+		let orientation = bestMove.boardObj.lastOrientation;
+		let direction = bestMove.boardObj.lastDirection;
+		console.log("bestMove", orientation, direction)
+		game.update(orientation, direction);
+		render(game);
+		// resolve("hi")
+	// });
+
+}
+
+
+
 function launchAi (boardObj) {
 	let aiGame = new Tree(boardObj);
 	let game = aiGame.head.boardObj;
 	let counter = 0;
+
 	console.log(game)
 	while(!game.gameOver) {
+
+		console.log("check")
 		game.hasWon();
 		game.hasLost();
-
 		render(game);
-		let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
-		let orientation = bestMove.boardObj.lastOrientation;
-		let direction = bestMove.boardObj.lastDirection;
-		game.update(orientation, direction);
+		makeBestMove(aiGame, game);
 		render(game);
 		game.fillRandomEmptySpace();
 		counter++;
+
 	}
 	return counter;
 }
@@ -97,11 +130,12 @@ $("body").keydown(e => {
 			render(humanGame);
 
 		}
+
 	 	humanGame.hasLost();
-	 	if (humanGame.gameOver) {
-	 		alert("gameOver");
-	 		//humanGame.clearBoard()
-	 	}
+	 	// if (humanGame.gameOver) {
+	 	// 	alert("gameOver");
+	 	// 	//humanGame.clearBoard()
+	 	// }
 		humanGame.fillRandomEmptySpace();
 		render(humanGame);
 	}

@@ -1,6 +1,6 @@
 /* CURRENTLY IN: styles/main.css */
 
-.container {
+.board-container {
 	border: 1px solid black;
 	padding: 5px;
 	margin: 0 auto;
@@ -27,7 +27,7 @@
 .empty {
 	background-color: gray;
 }
-.row {
+.board-row {
 
 	display: flex;
 	flex-flow: row wrap;
