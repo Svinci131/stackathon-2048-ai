@@ -57,7 +57,6 @@ class Tree {
 		}
 	}
 	minimax (node, depth, maximizingPlayer) {
-		
 		if (depth === 0 || node.boardObj.board.gameOver) {
 			return node; 
 		}
@@ -66,13 +65,16 @@ class Tree {
 			node.children = createAllPossibleDelibrateStates(node);
 			let best = -Infinity;
 			node.children.forEach(child => {
+				// console.log("score", child.score, child.boardObj.lastDirection)
 				let val = this.minimax(child, depth-1, false); 
 				// console.log("score", val.score);
 				if (best instanceof Node) {
 					best = best.score > val.score ? best : val;
 				}
 				else best = best > val.score ? best : val;
+				//console.log("best", best, "val", val)
 			});
+			//console.log(maximizingPlayer, depth, "here", best);
 
 			return best;
 		}
@@ -82,14 +84,22 @@ class Tree {
 			let best = Infinity;
 			// console.log(depth, "p2", node);
 			node.children.forEach(child => {
+				
 				let val = this.minimax(child, depth - 1, true);
 				//we want to assume the worst
 				if (best instanceof Node) {
-					best = best.score < val.score ? best : val;
+					best = best.score > val.score ? best : val;
 				}
-				else best = best < val.score ? best : val;
+				else {
+					best = best < val.score ? best : val;
+				}
+				// console.log("score", best, val)
+				// if (best > val.score) {
+				// 	console.log("score", best, val)
+				// }
 				// bestVal = Math.min(bestVal, val);			
 			});
+			// console.log(maximizingPlayer, depth, "here", best || best.score);
 			return best;
 		}
 	}

@@ -51,21 +51,6 @@ function render (gameBoard) {
 }
 
 start();
-//ai
-function launchAi () {
-	while(!gameOver) {
-		let bestMove = aiGame.minimax(aiGame.head, 3, true).boardObj;
-		//console.log("move",bestMove.lastOrientation, bestMove.lastDirection);
-		game.update(bestMove.lastOrientation, bestMove.lastDirection);
-		console.log(render)
-		render(game);
-		//console.log("after playre one",aiGame.head.boardObj.board);
-		game.fillRandomEmptySpace();
-		render(game);
-		//console.log("after Random",aiGame.head.boardObj.board);
-	} 
-}
-
 //human user 
 $("body").keydown(e => {
 	console.log(aiMode)
@@ -90,10 +75,13 @@ $("body").keydown(e => {
 			render(board);
 
 		}
-		// setTimeout(function(){ 
-			board.fillRandomEmptySpace();
-			render(board);
-		// }, 500)
+	 	board.hasLost();
+	 	if (board.gameOver) {
+	 		alert("gameOver");
+	 		Window.reload();
+	 	}
+		board.fillRandomEmptySpace();
+		render(board);
 	}
 });
 	

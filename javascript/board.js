@@ -52,7 +52,7 @@ class board {
 
 	}
 	hasWon() {
-		if (this.actualScore() === 8) {
+		if (this.actualScore() === 2048) {
 			this.gameOver = true;
 		}
 	}
