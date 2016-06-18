@@ -4,7 +4,7 @@
 const Board = require('./board');
 const Tree = require('./ai/tree');
 const humanGame = new Board();
-
+const colors = require("./frontend/colorObj")
 
 let aiMode = false;
 
@@ -45,10 +45,10 @@ function render (gameBoard) {
 			if (el.text() !== board[row][col]) {
 				el.empty();
 				if (board[row][col]) {
-					$(el).html('<div class="cell-num"><h1>'+board[row][col]+'</h1></div>')
+					$(el).html('<div class="cell-num '+colors[board[row][col]]+'">'+board[row][col]+'</div>')
 				}
 				else {
-					$(el).html('<div class="cell-num zero"><h1>'+board[row][col]+'</h1></div>')
+					$(el).html('<div class="cell-num zero">'+board[row][col]+'</div>')
 				}
 			}
 			
@@ -114,16 +114,15 @@ $("body").keydown(e => {
 		else if(e.keyCode === 40) { //up
 			humanGame.update ("vertical", "down");
 			render(humanGame);
-
 		}
-
-	 	humanGame.hasLost();
-	 	// if (humanGame.gameOver) {
-	 	// 	alert("gameOver");
-	 	// 	//humanGame.clearBoard()
-	 	// }
 		humanGame.fillRandomEmptySpace();
 		render(humanGame);
+		humanGame.hasLost();
+	 	console.log(humanGame.gameOver)
+	 	if (humanGame.gameOver) {
+	 		alert("gameOver");
+	 		//humanGame.clearBoard()
+	 	}
 	}
 });
 	
