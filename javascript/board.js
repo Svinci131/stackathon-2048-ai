@@ -51,8 +51,12 @@ class board {
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
 
 	}
+	highestTile () {
+		let all = getFlatArr(this.board);
+		return Math.max.apply( Math, all );
+	}
 	hasWon() {
-		if (this.actualScore() === 2048) {
+		if (this.highestTile() === 8) {
 			this.gameOver = true;
 		}
 	}
@@ -109,7 +113,9 @@ class board {
 	//o(n)
 	actualScore () {
 		let all = getFlatArr(this.board);
-		return Math.max.apply( Math, all );
+		return all.reduce((a,b) => {
+			return a + b
+		});
 	}
 	//o(n*n)
 	clusteredScore () {

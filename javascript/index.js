@@ -50,6 +50,29 @@ function render (gameBoard) {
 	}
 }
 
+function launchAi () {
+	while(!game.gameOver) {
+
+		game.hasWon();
+		game.hasLost();
+
+		console.log("before", aiGame.head.boardObj.board)
+		render(game);
+		
+			let bestMove = aiGame.minimax(aiGame.head, 3, true);
+			let orientation = bestMove.boardObj.lastOrientation;
+			let direction = bestMove.boardObj.lastDirection;
+		
+		game.update(orientation, direction);
+		
+
+		setTimeout(function() {
+			game.fillRandomEmptySpace();
+			render(game);
+		}, 5000);
+	
+	} 
+}
 start();
 //human user 
 $("body").keydown(e => {
