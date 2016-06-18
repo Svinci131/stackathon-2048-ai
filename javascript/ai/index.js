@@ -18,9 +18,11 @@ let lastLastMove;
 
 //aplha beta
 while(!game.gameOver) {
-	//console.log("before/ after Random", aiGame.head.boardObj.board);
+	game.hasWon();
+	game.hasLost();
+	console.log("before/ after Random", aiGame.head.boardObj.board);
 	let bestMove = aiGame.alphaBeta(aiGame.head, 3, -Infinity, Infinity, true);
-	//console.log("best", bestMove);
+	console.log("best", bestMove);
 	if(bestMove === Infinity) {
 		console.log("count",counter)
 		break;

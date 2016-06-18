@@ -33,9 +33,13 @@ class board {
 
 	fillRandomEmptySpace() {
 		var emptySpots = this.getEmptySpots();
-		var random = Math.floor(Math.random() * emptySpots.length);
-		var cell = emptySpots[random];
-		this.board[cell[0]][cell[1]] = twoOrFour();
+		//var random = Math.floor(Math.random() * emptySpots.length-1);
+		var random = Math.round(Math.random() * ((emptySpots.length-1) - 0) + 0);
+		if (emptySpots.length) {
+			var coords = emptySpots[random];
+			this.board[coords[0]][coords[1]] = twoOrFour();
+		}
+		
 	}
 
 	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
