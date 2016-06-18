@@ -24,18 +24,23 @@ game.fillRandomEmptySpace();
 // }
 
 //minmax
-//while(!gameOver) {
-// for (let i = 0; i < 10; i++) {
-	//console.log("before", aiGame.head.boardObj.board)
-	//render();
+// while(!gameOver) {
+
+for (let i = 0; i < 10; i++) {
+	game.hasWon();
+	game.hasLost();
+	console.log("before", aiGame.head.boardObj.board)
+	// render();
 	let bestMove = aiGame.minimax(aiGame.head, 3, true);
-	console.log(bestMove);
-	// let orientation = bestMove.boardObj.lastOrientation;
-	// let direction = bestMove.boardObj.lastDirection;
-	// console.log("move", orientation, direction);
-	// game.update(orientation, direction);
-	// console.log("after playre one",aiGame.head.boardObj.board);
-	// game.fillRandomEmptySpace();
-	// console.log("after Random",aiGame.head.boardObj.board);
-//} 
+	console.log("gameOver", game.actualScore());
+	console.log("gameOver", game.gameOver);
+	let orientation = bestMove.boardObj.lastOrientation;
+	let direction = bestMove.boardObj.lastDirection;
+	console.log("move", orientation, direction);
+	game.update(orientation, direction);
+	console.log("after playre one",aiGame.head.boardObj.board);
+	game.fillRandomEmptySpace();
+	console.log("after Random",aiGame.head.boardObj.board);
+
+} 
 //let bestMove = Tree.minimax(Tree.head, 3, true);

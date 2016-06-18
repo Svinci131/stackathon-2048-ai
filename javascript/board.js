@@ -36,7 +36,6 @@ class board {
 		var random = Math.floor(Math.random() * emptySpots.length);
 		var cell = emptySpots[random];
 		this.board[cell[0]][cell[1]] = twoOrFour();
-		this.gameOver = true;
 	}
 
 	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
@@ -53,9 +52,9 @@ class board {
 
 	}
 	hasWon() {
-		if (this.actualScore() === 8) {
-			this.gameOver = true;
-		}
+		// if (this.actualScore() === 8) {
+		// 	this.gameOver = true;
+		// }
 	}
  	//rewrite after stackathon
 	hasLost () {
@@ -95,6 +94,7 @@ class board {
 
 		//move each way 
 		if (cantMoveRight && cantMoveLeft && cantMoveUp && cantMoveDown) {
+			console.log("lost");
 			this.gameOver = true;
 		}
 	}

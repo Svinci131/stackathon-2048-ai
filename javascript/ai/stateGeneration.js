@@ -10,8 +10,10 @@ function createDelibrateState (currNodeBoard, orientation, direction) {
 	board.board = clone(currNodeBoard);
 	board.update(orientation, direction);
 	let node = new Node(board);
+	node.boardObj.hasLost()
+	node.boardObj.hasWon()
 	// if (node.boardObj.hasLost()) {
-		
+
 	// }
 	return node;
 }
