@@ -37,8 +37,9 @@ class Tree {
 			node.children = createAllPossibleDelibrateStates(node);
 			for(let i = 0; i < node.children.length; i++) {
 				let child = node.children[i];
+				//console.log(depth, "child", child)
 				a = this.max(a, this.alphaBeta(child, depth-1, a, b, false));
-				console.log("ai move", depth, child.score, a.score || a);
+				// console.log("ai move", depth, child.score, a.score || a);
 				if (b <= a) {
 					break;
 				}
@@ -48,10 +49,11 @@ class Tree {
 		else {
 			node.children = createAllPossibleRandomStates(node);
 			for(let i = 0; i < node.children.length; i++) {
+				//console.log("oponent move", depth, child.score, b.score || b);
 				let child = node.children[i];
 			
 				b = this.min(b, this.alphaBeta(child, depth-1, a, b, true));
-				console.log("oponent move", depth, child.score, b.score || b);
+				
 				if (b <= a) {
 					break;
 				}

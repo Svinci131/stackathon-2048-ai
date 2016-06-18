@@ -9,6 +9,7 @@ function createDelibrateState (currNodeBoard, orientation, direction) {
 	let board = new Board (); 
 	board.board = clone(currNodeBoard);
 	board.update(orientation, direction);
+
 	let node = new Node(board);
 	// node.boardObj.hasLost()
 	// node.boardObj.hasWon()
@@ -31,6 +32,7 @@ function createRandomState (currNodeBoard, rowIndex, colIndex, val) {
 	let board = new Board();//create board
 	board.board = cloneDeep(currNodeBoard); //clone parentboard
 	board.board[rowIndex][colIndex] = val;//set space in new board to val 
+
 	let node = new Node(board);
 	return node;
 }
@@ -41,16 +43,16 @@ function createAllPossibleRandomStates(currNode) {
 	let board = currNode.boardObj.board;
 	let emptySpots = currNode.boardObj.getEmptySpots();
 	emptySpots.forEach((coords, i) => {
+
 		let rowIndex = coords[0];
 		let colIndex = coords[1];
 		for(let k = 0; k < 2; k++) {
 			let possibleState = createRandomState(board,rowIndex, colIndex, options[k]);
-				console.log(possibleState.boardObj.board)
 			possibleStates.push(possibleState);
 		}
 	});
 
-	
+
 	return possibleStates;
 }
 

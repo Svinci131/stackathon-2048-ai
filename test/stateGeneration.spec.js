@@ -80,7 +80,7 @@ describe("createAllPossibleRandomStates", function (){
 		expect(node01.boardObj.board).to.not.eql(possibleStates[0].boardObj.board);
 	});
 	it("gets create a new node with two and four for everypossible empty space", function() {
-		//console.log(possibleStates);
+		console.log("HERE", possibleStates);
 		expect(possibleStates.length).to.equal(32);
 	});
 });

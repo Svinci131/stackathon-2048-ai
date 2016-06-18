@@ -5,15 +5,17 @@ const Tree = require('./tree');
 // const render = require('../frontend/render.js');
 
 const board = new Board ();
+board.fillRandomEmptySpace();
 const aiGame = new Tree(board);
 const game = aiGame.head.boardObj
 
 
 	
-game.fillRandomEmptySpace();
+
 let counter = 0;
 //let bestMove = aiGame.alphaBeta(aiGame.head, 8, -Infinity, Infinity, true);
 let lastLastMove;
+
 //aplha beta
 while(!game.gameOver) {
 	//console.log("before/ after Random", aiGame.head.boardObj.board);
