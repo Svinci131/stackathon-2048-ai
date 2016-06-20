@@ -60,7 +60,8 @@ function makeBestMove(aiGame, game) {
 	let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
-	game.update(orientation, direction);
+	game.board = bestMove.boardObj.board;
+	//game.update(orientation, direction);
 	render(game);
 	if (direction === "left") {
 		console.log("ai Move", orientation, direction)
@@ -117,6 +118,7 @@ $("body").keydown(e => {
 		}
 		humanGame.fillRandomEmptySpace();
 		render(humanGame);
+		humanGame.hasWon();
 		humanGame.hasLost();
 	 	console.log(humanGame.gameOver)
 	 	if (humanGame.gameOver) {

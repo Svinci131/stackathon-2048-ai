@@ -60,12 +60,12 @@ describe("createRandomState", function (){
 		expect(possibleState).to.be.an.instanceof(Node);
 	});
 	it ("it adds val to col in row", function() {
-		console.log(possibleState)
+		// console.log(possibleState)
 		//var possibleState = stateGen.createRandomState(node.boardObj.board, 0, 2, 4);
 		expect(possibleState.boardObj.board[0][2]).to.equal(4);
 	});
 	it("does not affect the parent node", function(){
-		console.log(node.boardObj.board);
+		// console.log(node.boardObj.board);
 		expect(node.boardObj.board).to.not.eql(possibleState.boardObj.board);
 
 	});
@@ -80,7 +80,7 @@ describe("createAllPossibleRandomStates", function (){
 		expect(node01.boardObj.board).to.not.eql(possibleStates[0].boardObj.board);
 	});
 	it("gets create a new node with two and four for everypossible empty space", function() {
-		console.log("HERE", possibleStates);
+		//console.log("HERE", possibleStates);
 		expect(possibleStates.length).to.equal(32);
 	});
 });
