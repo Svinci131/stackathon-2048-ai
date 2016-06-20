@@ -1,0 +1,73 @@
+/* CURRENTLY IN: styles/main.css */
+
+.board-container {
+	border: 1px solid rgb(170, 183, 183);
+	padding: 5px;
+	margin: 0 auto;
+	/*width: 500px;
+	height: auto;*/
+}
+.cell {
+	border: 5px solid white;
+	flex: 1;
+	height:100px;
+	color: white;
+	font-size: 60px;
+	font-family: sans-serif;
+	vertical-align: middle;
+}
+.cell-num {
+	text-align: center;
+	vertical-align: middle;
+	height: 90px;
+	border-radius: 25px;
+    background: #73AD21;
+}
+.zero {
+	display: none;
+}
+.empty {
+	background-color: rgb(170, 183, 183);
+}
+.board-row {
+
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.two {
+	background-color: rgb(26, 188, 156);
+	color: white;
+}
+.four {
+	background-color: rgb(52, 152, 219);
+	color: white;
+}
+
+.eight{
+	background-color: rgb(39, 174, 96);
+	color: white;
+}
+.sixteen {
+	background-color: rgb(241, 196, 15);
+/*	background-color: rgb(22, 160, 133);*/
+	color: white;
+}
+.thirtyTwo {
+/*	background-color: rgb(175, 122, 196);*/
+	background-color: rgb(41, 128, 185);
+	color: white;
+}
+.sixtyFour {
+	background-color: rgb(231, 26, 60);
+	color: white;
+}
+.oneTwentyEight {
+	background-color: rgb(243, 156, 80);
+	color: white;
+} 
+.twoFiftySix {
+	background-color: rgb(211, 84, 0);
+	color: white;
+}
+
