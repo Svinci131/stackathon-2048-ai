@@ -117,8 +117,8 @@ describe("clusteringScore", function (){
 						[4,2,2,0],
 						[128,2,2,0],
 						[4,2048,8,4]];
-		console.log(Board.actualScore(), Board.clusteredScore())
-		console.log(worseBoard.actualScore(), worseBoard.clusteredScore())
+		// console.log(Board.actualScore(), Board.clusteredScore())
+		// console.log(worseBoard.actualScore(), worseBoard.clusteredScore())
 		expect(Board.clusteredScore()).to.be.below(worseBoard.clusteredScore());
 	});
 	it ("works in a bunch of situations", function () {
@@ -139,7 +139,7 @@ describe("clusteringScore", function (){
 		  				[ 0, 0, 0, 2 ], 
 		  				[ 0, 0, 0, 4 ], 
 		  				[ 0, 0, 4, 4 ] ]
-		console.log(Board06.clusteredScore());
+		// console.log(Board06.clusteredScore());
 		expect(Board.clusteredScore()).to.not.equal(0);
 
 	})
@@ -240,8 +240,14 @@ describe("update", function () {
 		expect(Board.lastOrientation).to.equal("vertical");
 	});
 	it ("takes an orientation and transposes board if it's diff from last", function() {
-		Board.update("vertical", "down");
-		// expect(transposedCall).to.have.been.called;
+		var downBoard = new board();
+		downBoard.board = [ [ 2, 4, 8, 2 ],
+							  [ 4, 2, 8, 4 ],
+							  [ 2, 4, 16, 4 ],
+							  [ 2, 8, 16, 4 ] ];
+  	downBoard.update("vertical", "down");
+  	// console.log("down", downBoard);
+	//expect(downBoard).to.have.been.called;
 	});
 
 });

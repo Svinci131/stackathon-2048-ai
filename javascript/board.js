@@ -16,8 +16,9 @@ class board {
 		this.lastDirection;
 		this.gameOver = false; 
 		this.transposed; 
+		this.winningTile = 128;
 	}
-	clearBoard () {
+	clearBoard () {  
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
 	}
 	//O(1) = add 2 or 4 to a random emptysquare w 0
@@ -45,7 +46,7 @@ class board {
 	}
 
 	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
-	update (orientation, direction) { 
+	update (orientation, direction, option) { 
 		// const lastBoard = clone(this.board);
 		//if direction is diff transpose
 		this.lastDirection = direction;
@@ -53,20 +54,21 @@ class board {
 			this.board = transpose(this.board);
 		}
 		let swipeFunc = directions[orientation][direction];//define direction to swipe in 
+		// console.log( orientation, direction )
 		this.swipe(swipeFunc);//swipe
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
-
+		if (option) console.log(option)
 	}
 	highestTile () {
 		let all = getFlatArr(this.board);
 		return Math.max.apply( Math, all );
 	}
 	hasWon() {
-		if (this.highestTile() === 32) {
+		if (this.highestTile() === this.winningTile) {
 			this.gameOver = true;
 		}
 	}
- 	//rewrite after stackathon
+ 	//rewrite after stackathon 
 	hasLost () {
 
 		let copy = clone(this.board);
@@ -145,9 +147,11 @@ class board {
 		let actualScore = this.actualScore();
 		let clusteredScore = this.clusteredScore();
 		let numberOfEmptyCells = this.getEmptySpots().length;//o(n)
-		//sv 
-		let score = (actualScore-clusteredScore)*10;
-		// console.log("here", this.lastDirection, score);
+		let highestTile = this.highestTile()
+		//sv
+		let score = ((actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore)*10)+highestTile;
+		//let score = ((actualScore-clusteredScore)*10)+numberOfEmptyCells;
+		//console.log("here", this.lastDirection, score);
 		//Math.floor(((actualScore/clusteredScore)*10));
 		return score;
 	}
