@@ -16,8 +16,9 @@ class board {
 		this.lastDirection;
 		this.gameOver = false; 
 		this.transposed; 
+		this.winningTile = 128;
 	}
-	clearBoard () {
+	clearBoard () {  
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
 	}
 	//O(1) = add 2 or 4 to a random emptysquare w 0
@@ -63,7 +64,7 @@ class board {
 		return Math.max.apply( Math, all );
 	}
 	hasWon() {
-		if (this.highestTile() === 128) {
+		if (this.highestTile() === this.winningTile) {
 			this.gameOver = true;
 		}
 	}
@@ -146,8 +147,9 @@ class board {
 		let actualScore = this.actualScore();
 		let clusteredScore = this.clusteredScore();
 		let numberOfEmptyCells = this.getEmptySpots().length;//o(n)
-		//sv 
-		let score = (actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore)
+		let highestTile = this.highestTile()
+		//sv
+		let score = ((actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore)*10)+highestTile;
 		//let score = ((actualScore-clusteredScore)*10)+numberOfEmptyCells;
 		//console.log("here", this.lastDirection, score);
 		//Math.floor(((actualScore/clusteredScore)*10));
