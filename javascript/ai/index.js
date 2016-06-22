@@ -21,7 +21,7 @@ while(!game.gameOver) {
 	console.log( game.gameOver, game.board );
 
 	//console.log("after Random is added", aiGame.head.boardObj);
-	let bestMove = aiGame.alphaBeta(cloneDeep(aiGame.head), 5, -Infinity, Infinity, true);
+	let bestMove = aiGame.alphaBeta(cloneDeep(aiGame.head), 10, -Infinity, Infinity, true);
 
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;

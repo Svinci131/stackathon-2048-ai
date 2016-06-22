@@ -47,12 +47,7 @@ class Tree {
 			for(let i = 0; i < node.children.length; i++) {
 				let child = node.children[i];
 				a = this.max(a, this.alphaBeta(child, depth-1, a, b, false));
-				// console.log('BREAK STATE', a, b, i);
-				// console.log('================')
-				// console.log('A: ', a.score || a );
-				// console.log('B: ', b.score || b );
-				// console.log('i: ', i );
-				// console.log('================')
+
 				if (this.shouldBreak(a, b)) {
 					break;
 				}
@@ -65,11 +60,7 @@ class Tree {
 			for(let i = 0; i < node.children.length; i++) {
 				let child = node.children[i];
 				b = this.min(b, this.alphaBeta(child, depth-1, a, b, true));
-				// console.log('================0')
-				// console.log('A: ', a.score || a );
-				// console.log('B: ', b.score || b );
-				// console.log('i: ', i );
-				// console.log('================')
+
 				if (this.shouldBreak(a, b)) {
 					break;
 				}
@@ -78,10 +69,7 @@ class Tree {
 			if (!node.children.length) {
 				node.children = null;
 				b = this.alphaBeta(node, depth-1, a, b, true);
-				// console.log('================1')
-				// console.log('A: ', a.score || a );
-				// console.log('B: ', b.score || b );
-				// console.log('================')
+
 			}
 			return b;
 		}

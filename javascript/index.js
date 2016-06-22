@@ -1,6 +1,5 @@
 'use strict' 
 
-
 const Board = require('./board');
 const Tree = require('./ai/tree');
 const humanGame = new Board();
@@ -57,7 +56,7 @@ function render (gameBoard) {
 }
 //doesn't end right on win 
 function makeBestMove(aiGame, game) {
-	let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
+	let bestMove = aiGame.alphaBeta(aiGame.head, 7, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
 	game.board = bestMove.boardObj.board;

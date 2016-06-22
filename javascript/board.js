@@ -16,7 +16,7 @@ class board {
 		this.lastDirection;
 		this.gameOver = false; 
 		this.transposed; 
-		this.winningTile = 128;
+		this.winningTile = 2048;
 	}
 	clearBoard () {  
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
@@ -149,7 +149,7 @@ class board {
 		let numberOfEmptyCells = this.getEmptySpots().length;//o(n)
 		let highestTile = this.highestTile()
 		//sv
-		let score = ((actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore)*10)+highestTile;
+		let score = (((highestTile*numberOfEmptyCells)*10) - clusteredScore);
 		//let score = ((actualScore-clusteredScore)*10)+numberOfEmptyCells;
 		//console.log("here", this.lastDirection, score);
 		//Math.floor(((actualScore/clusteredScore)*10));
