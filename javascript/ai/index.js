@@ -2,40 +2,87 @@
 const Board = require("../board");
 const Tree = require('./tree');
 const cloneDeep = require('clone-deep');
+const transpose = require("../utils").transpose;
 // const render = require('../frontend/render.js');
 
 const board = new Board ();
 board.fillRandomEmptySpace();
 const aiGame = new Tree(board);
 const game = aiGame.head.boardObj
-
 let counter = 0;
-//let bestMove = aiGame.alphaBeta(aiGame.head, 8, -Infinity, Infinity, true);
-let lastLastMove;
 
-//aplha beta
+
+// launchAi (aiGame, game, counter); 
+// //aplha beta
+// function makeBestMove(aiGame, game) {
+// 	let bestMove = aiGame.alphaBeta(aiGame.head, 7, -Infinity, Infinity, true);
+// 	let orientation = bestMove.boardObj.lastOrientation;
+// 	let direction = bestMove.boardObj.lastDirection;
+// 	console.log("Best Move", bestMove.board)
+// 	console.log("++++++++++++++++++++++++++")
+// 	console.log("move", orientation, direction)
+// 	game.update(orientation, direction, "DONE UPDATING");
+// }
+
+// function launchAi (aiGame, game, counter) {
+
+// 	makeBestMove(aiGame, game);
+// 	console.log("++++++++++++++++++++++++++")
+// 	console.log("after update", game.board)
+// 	game.fillRandomEmptySpace();
+// 	console.log("++++++++++++++++++++++++++")
+// 	console.log("after add Random", game.board);
+
+// 	counter++;
+// 	game.hasWon();
+// 	game.hasLost();
+// 	console.log("is it over?", game.gameOver);
+// 	if (!game.gameOver) {
+// 		launchAi (aiGame, game, counter);
+// 	}
+// 	else {
+// 		console.log("Game Over", game.board)
+// 		//alert("We've reached"+ game.highestTile()+"in"+counter+"moves")
+// 	}
+// }
+
+
+
+
 while(!game.gameOver) {
-	
 	game.hasWon();
 	game.hasLost();
-	console.log( game.gameOver, game.board );
-
+	console.log( "before", game.gameOver, game.board );
 	//console.log("after Random is added", aiGame.head.boardObj);
-	let bestMove = aiGame.alphaBeta(cloneDeep(aiGame.head), 10, -Infinity, Infinity, true);
-
+	let bestMove = aiGame.alphaBeta(cloneDeep(aiGame.head), 3, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
-		console.log("best move", bestMove.boardObj.board, direction)
-	//console.log("move the update", orientation, direction, bestMove.score)
-	game.board = bestMove.boardObj.board;
+	console.log("best move", bestMove.boardObj.board, direction)
 	//game.update(orientation, direction, "DONE UPDATING");
-	console.log("after UPDATING", game);
-	// lastLastMove = cloneDeep(game.board);
+	console.log("after UPDATING", game.board, game.gameOver);
+	console.log("transpose", transpose(game.board) )
 	game.fillRandomEmptySpace();
-	counter++;
 
+	counter++;
 }
 
+///
+
+// [ [ 2, 4, 2, 8 ],
+//   [ 4, 16, 4, 8 ],
+//   [ 8, 32, 4, 2 ],
+//   [ 16, 8, 2, 4 ] ]
+
+  // [ [ 2, 4, 0, 0 ],
+  // [ 4, 16, 8, 16 ],
+  // [ 2, 8, 32, 8 ],
+  // [ 16, 2, 8, 2 ] ]
+
+
+ // [ [ 4, 32, 2, 4 ],
+ //   [ 8, 4, 16, 4 ],
+ //   [ 4, 16, 2, 8 ],
+ //   [ 8, 4, 8, 2 ] ]
 
 // minmax
 // while(!game.gameOver) {
