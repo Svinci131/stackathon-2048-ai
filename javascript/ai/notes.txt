@@ -1,0 +1,24 @@
+//game not over 
+[ [ 4, 4, 2, 4 ],
+  [ 0, 4, 2, 16 ],
+  [ 0, 4, 8, 64 ],
+  [ 2, 8, 16, 4 ] ]
+
+
+//if we assume the comp picks worst move for us and pick the best move for that board for the next 5 boards
+it'll look like this
+[ [ 0, 0, 16, 4 ],
+  [ 0, 0, 4, 16 ],
+  [ 4, 16, 64, 16 ],
+  [ 0, 0, 2, 4 ] ] right
+
+//move right //transpose back
+[ [ 0, 0, 4, 2 ],
+  [ 0, 4, 8, 8 ],
+  [ 0, 4, 8, 16 ],
+  [ 4, 16, 64, 4 ] ] false
+
+[ [ 4, 0, 0, 0 ],
+  [ 16, 4, 4, 0 ],
+  [ 64, 8, 8, 4 ],
+  [ 4, 16, 8, 2 ] ] false

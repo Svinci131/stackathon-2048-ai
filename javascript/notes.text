@@ -1,0 +1,44 @@
+//alpha beta 
+  //gets back a board with a direction - which is possible and maybe the best 
+  ///game does not update though 
+
+//test one 
+
+BEFORE [ [ 16, 2, 4, 2 ],
+  [ 4, 8, 16, 2 ],
+  [ 4, 2, 16, 8 ],
+  [ 2, 4, 8, 4 ] ]
+============
+DIRECTION down
+orientation vertical
+============
+BEST MOVE [ [ 0, 0, 0, 2 ],
+  [ 0, 0, 32, 4 ],
+  [ 2, 32, 8, 2 ],
+  [ 0, 0, 16, 8 ] ]
+============
+//transposed
+AFTER [ [ 0, 2, 0, 0 ],
+  [ 16, 8, 4, 4 ],
+  [ 8, 2, 32, 8 ],
+  [ 2, 4, 8, 4 ] ]
+
+
+  vs
+
+
+  WOO
+before false [ [ 16, 2, 4, 2 ],
+  [ 4, 8, 16, 2 ],
+  [ 4, 2, 16, 8 ],
+  [ 2, 4, 8, 4 ] ]
+best move [ [ 0, 0, 0, 2 ],
+  [ 0, 0, 32, 4 ],
+  [ 2, 32, 8, 2 ],
+  [ 0, 0, 16, 8 ] ] down
+DONE UPDATING
+after UPDATING [ [ 16, 2, 4, 2 ],
+  [ 4, 8, 16, 2 ],
+  [ 4, 2, 16, 8 ],
+  [ 2, 4, 8, 4 ] ] false
+WOO

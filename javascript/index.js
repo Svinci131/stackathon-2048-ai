@@ -1,6 +1,5 @@
 'use strict' 
 
-
 const Board = require('./board');
 const Tree = require('./ai/tree');
 const humanGame = new Board();
@@ -61,6 +60,9 @@ function makeBestMove(aiGame, game) {
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
 	game.board = bestMove.boardObj.board;
+	game.board = bestMove.boardObj.board;
+	game.lastOrientation = orientation;
+	game.lastDirection = direction;
 	//game.update(orientation, direction);
 	render(game);
 	if (direction === "left") {
@@ -73,24 +75,24 @@ function makeBestMove(aiGame, game) {
 
 function launchAi (aiGame, game, counter) {
 	render(game);
-	setTimeout(makeBestMove, 100, aiGame, game)
+	setTimeout(makeBestMove, 300, aiGame, game)
 	setTimeout(function () {
-		// console.log("oponent");
+		console.log("two");
 		game.fillRandomEmptySpace();
 		counter++;
 		render(game);
-	}, 300, aiGame, game, counter);
+	}, 500, aiGame, game, counter);
 	setTimeout(function () {
 		game.hasWon();
 		game.hasLost();
-		console.log("gameover", game.gameOver);
+		console.log("three gameover", game.gameOver);
 		if (!game.gameOver) {
 			launchAi (aiGame, game, counter);
 		}
 		else {
 			alert("We've reached"+ game.highestTile()+"in"+counter+"moves")
 		}
-	}, 700, aiGame, game, counter);
+	}, 1000, aiGame, game, counter);
 }
 
 

@@ -1,0 +1,5 @@
+// they all get best move and update correctly individually 
+
+// setting best move.board stops it from breaking 
+
+// but changing the orientation breaks it 

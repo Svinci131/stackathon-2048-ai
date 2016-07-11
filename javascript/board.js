@@ -16,7 +16,7 @@ class board {
 		this.lastDirection;
 		this.gameOver = false; 
 		this.transposed; 
-		this.winningTile = 128;
+		this.winningTile = 1024;
 	}
 	clearBoard () {  
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
@@ -35,6 +35,7 @@ class board {
 	}
 
 	fillRandomEmptySpace() {
+		console.log("WOO")
 		var emptySpots = this.getEmptySpots();
 		//var random = Math.floor(Math.random() * emptySpots.length-1);
 		var random = Math.round(Math.random() * ((emptySpots.length-1) - 0) + 0);
@@ -49,7 +50,7 @@ class board {
 	update (orientation, direction, option) { 
 		// const lastBoard = clone(this.board);
 		//if direction is diff transpose
-		this.lastDirection = direction;
+		
 		if (orientation !== this.lastOrientation) {
 			this.board = transpose(this.board);
 		}
@@ -58,6 +59,7 @@ class board {
 		this.swipe(swipeFunc);//swipe
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
 		if (option) console.log(option)
+		this.lastDirection = direction;
 	}
 	highestTile () {
 		let all = getFlatArr(this.board);
@@ -127,15 +129,24 @@ class board {
 	}
 	//o(n*n)
 	clusteredScore () {
+		let highestTile = this.highestTile()
 		let all = getFlatArr(this.board); 
+		let cornerBonus;
 		let clusteredScore = all.reduce((a, b, i) => {//o(n)
 			let neighbors = utils.getNeighbors(all, b);//get neighborso(o(1));
 			//estimate the sum of absolute differences from its neighbors (excluding the empty cells)
 			//we take the average difference.
+
 			let averageDiff = utils.getAverageDiffSansZeros(neighbors, i);//o(n)
-			a += averageDiff //o(n)
+			a += averageDiff //o(n)			
+			if ((i)%4 === 0 && b === highestTile) {
+				a-=100
+			}
 			return a;
-		}, 0);		
+		}, 1);	
+		
+		// if (cornerBonus) clusteredScore-=100;
+		//console.log("here9", clusteredScore)	
 		return clusteredScore;
 	}
 	//o(n)
@@ -149,7 +160,7 @@ class board {
 		let numberOfEmptyCells = this.getEmptySpots().length;//o(n)
 		let highestTile = this.highestTile()
 		//sv
-		let score = ((actualScore+Math.log(actualScore)*numberOfEmptyCells - clusteredScore)*10)+highestTile;
+		let score = (((highestTile*numberOfEmptyCells)*10) - clusteredScore);
 		//let score = ((actualScore-clusteredScore)*10)+numberOfEmptyCells;
 		//console.log("here", this.lastDirection, score);
 		//Math.floor(((actualScore/clusteredScore)*10));

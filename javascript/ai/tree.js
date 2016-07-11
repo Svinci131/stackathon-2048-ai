@@ -39,54 +39,68 @@ class Tree {
 	}
 	alphaBeta (node, depth, a, b, maximizingPlayer) {
 		// console.log(depth, maximizingPlayer, a, b)
+		// node.boardObj.hasLost()
 		if (depth === 0) {
 			return node; 
 		}
 		if (maximizingPlayer) {  //ai 
+			console.log("what2", node)
 			node.children = createAllPossibleDelibrateStates(node);
+			if (depth === 1) {
+				console.log("kids", node.score, node.boardObj.lastDirection)
+				console.log("====================")
+				console.log(node.boardObj.board)
+				console.log("====================")
+				node.children.forEach(child => {
+					console.log(child.boardObj.lastDirection, child.score,  child.boardObj.board);
+				});
+			
+			}
 			for(let i = 0; i < node.children.length; i++) {
 				let child = node.children[i];
 				a = this.max(a, this.alphaBeta(child, depth-1, a, b, false));
-				// console.log('BREAK STATE', a, b, i);
-				// console.log('================')
-				// console.log('A: ', a.score || a );
-				// console.log('B: ', b.score || b );
-				// console.log('i: ', i );
-				// console.log('================')
+
 				if (this.shouldBreak(a, b)) {
 					break;
 				}
 			}
-
+			
 			return a;
 		}
 		else {
+
 			node.children = createAllPossibleRandomStates(node);
+			// if (depth === 2) {
+			// 	console.log("here")
+			// 	node.children.forEach(function (child) {
+			// 		console.log(node.score)
+			// 		console.log(node.boardObj.lastDirection, child.score, child.boardObj.board)
+			// 	})
+			// }
 			for(let i = 0; i < node.children.length; i++) {
 				let child = node.children[i];
+				child.boardObj.lastDirection = node.boardObj.lastDirection
+				child.boardObj.lastOrientation = node.boardObj.lastOrientation
 				b = this.min(b, this.alphaBeta(child, depth-1, a, b, true));
-				// console.log('================0')
-				// console.log('A: ', a.score || a );
-				// console.log('B: ', b.score || b );
-				// console.log('i: ', i );
-				// console.log('================')
+
 				if (this.shouldBreak(a, b)) {
 					break;
 				}
 			}
-
+			// if (depth === 4 && node.boardObj.lastDirection === "down") {
+			// 	console.log("kids", node.children)
+			// }
 			if (!node.children.length) {
 				node.children = null;
 				b = this.alphaBeta(node, depth-1, a, b, true);
-				// console.log('================1')
-				// console.log('A: ', a.score || a );
-				// console.log('B: ', b.score || b );
-				// console.log('================')
+
 			}
+
 			return b;
 		}
 	}
 	minimax (node, depth, maximizingPlayer) {
+
 		if (depth === 0 || node.break) {
 			return node; 
 		}
@@ -107,6 +121,7 @@ class Tree {
 		else { //normal comp
 			node.children = createAllPossibleRandomStates(node);
 			let best = Infinity;
+
 			node.children.forEach(child => {
 				let val = this.minimax(child, depth - 1, true);
 				//we want to assume the worst
