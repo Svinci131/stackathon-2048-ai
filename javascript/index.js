@@ -60,7 +60,7 @@ function makeBestMove(aiGame, game) {
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
 	game.board = bestMove.boardObj.board;
-	game.board = bestMove.boardObj.board;
+	// game.board = bestMove.boardObj.board;
 	game.lastOrientation = orientation;
 	game.lastDirection = direction;
 	//game.update(orientation, direction);
