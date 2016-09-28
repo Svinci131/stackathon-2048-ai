@@ -44,16 +44,16 @@ class Tree {
 			return node; 
 		}
 		if (maximizingPlayer) {  //ai 
-			console.log("what2", node)
+			// console.log("what2", node)
 			node.children = createAllPossibleDelibrateStates(node);
 			if (depth === 1) {
-				console.log("kids", node.score, node.boardObj.lastDirection)
-				console.log("====================")
-				console.log(node.boardObj.board)
-				console.log("====================")
-				node.children.forEach(child => {
-					console.log(child.boardObj.lastDirection, child.score,  child.boardObj.board);
-				});
+				// console.log("kids", node.score, node.boardObj.lastDirection)
+				// console.log("====================")
+				// console.log(node.boardObj.board)
+				// console.log("====================")
+				// node.children.forEach(child => {
+				// 	//console.log(child.boardObj.lastDirection, child.score,  child.boardObj.board);
+				// });
 			
 			}
 			for(let i = 0; i < node.children.length; i++) {

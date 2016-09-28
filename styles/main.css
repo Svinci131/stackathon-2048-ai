@@ -7,6 +7,28 @@
 	/*width: 500px;
 	height: auto;*/
 }
+.test {
+	width: 50%;
+	height: auto;
+	position: absolute;
+	top: 30%;
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 17px;
+    background-color: white;
+    left: 30%;
+    z-index: 1;
+    visibility: hidden;
+    box-shadow: 10px 10px 5px #888888;
+    border: 1px solid #888888;
+    box-shadow: 0px 10px 20px #888888;
+}
+.test a {
+	font-weight: bold;
+}
+.test button {
+	margin-top: 25px;
+}
 .cell {
 	border: 5px solid white;
 	flex: 1;

@@ -8,3 +8,5 @@ module.exports = {
 	128: "oneTwentyEight", 
 	256: "twoFiftySix"
 }
+
+	//$(".cell").forEach(el => $(el).empty());
