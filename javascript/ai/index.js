@@ -9,7 +9,7 @@ const board = new Board ();
 board.fillRandomEmptySpace();
 const aiGame = new Tree(board);
 const game = aiGame.head.boardObj
-let counter = 0;
+
 
 
 // launchAi (aiGame, game, counter); 
@@ -57,13 +57,14 @@ while(!game.gameOver) {
 	let bestMove = aiGame.alphaBeta(cloneDeep(aiGame.head), 3, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
-	console.log("best move", bestMove.boardObj.board, direction)
-	//game.update(orientation, direction, "DONE UPDATING");
+	console.log("best move same", bestMove.boardObj.board, direction)
+	console.log("best move transpose", transpose(bestMove.boardObj.board), direction)
+	game.update(orientation, direction);
 	console.log("after UPDATING", game.board, game.gameOver);
 	console.log("transpose", transpose(game.board) )
 	game.fillRandomEmptySpace();
 
-	counter++;
+	// counter++;
 }
 
 ///

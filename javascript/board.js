@@ -16,7 +16,7 @@ class board {
 		this.lastDirection;
 		this.gameOver = false; 
 		this.transposed; 
-		this.winningTile = 256;
+		this.winningTile = 1028;
 	}
 	clearBoard () {  
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];

@@ -6,8 +6,12 @@ const humanGame = new Board();
 const colors = require("./frontend/colorObj")
 
 let aiMode = false;
-
-$('#ai').on("click", function() {
+$('#close').on("click", function(el) { 
+	console.log("here")
+	$('.test').css("visibility", "none");
+});
+$('#playanyway').on("click", function() { 
+	$('.test').css("visibility", "none");
 	aiMode = true;
 	humanGame.clearBoard();
 	render(humanGame);
@@ -17,6 +21,10 @@ $('#ai').on("click", function() {
 	let counter = 0;
 	boardObj.fillRandomEmptySpace();
 	launchAi(aiGame, game , counter);
+});
+
+$('#ai').on("click", function() {
+	$(".test").css("visibility", "initial");
 });
 
 $('#humanGame').on("click", function() {
@@ -56,6 +64,7 @@ function render (gameBoard) {
 }
 //doesn't end right on win 
 function makeBestMove(aiGame, game) {
+	console.log("2. ai Move");
 	let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
@@ -64,28 +73,36 @@ function makeBestMove(aiGame, game) {
 	game.lastOrientation = orientation;
 	game.lastDirection = direction;
 	//game.update(orientation, direction);
+	console.log("made move")
 	render(game);
+
 	if (direction === "left") {
-		console.log("ai Move", orientation, direction)
+		console.log("2. ai Move", orientation, direction)
 	}
 	else if (direction === "right") {
-		console.log("ai Move", orientation, direction)
+		console.log("2. ai Move", orientation, direction)
 	}
 }
 
 function launchAi (aiGame, game, counter) {
+	//draws items in squares
+	console.log("???????????????????????????")
+	console.log("1. render board")
 	render(game);
+
 	setTimeout(makeBestMove, 300, aiGame, game)
+
 	setTimeout(function () {
-		console.log("two");
+		console.log("3. fill space");
 		game.fillRandomEmptySpace();
 		counter++;
 		render(game);
 	}, 500, aiGame, game, counter);
 	setTimeout(function () {
+
 		game.hasWon();
 		game.hasLost();
-		console.log("three gameover", game.gameOver);
+		console.log("4 gameover", game.gameOver);
 		if (!game.gameOver) {
 			launchAi (aiGame, game, counter);
 		}
