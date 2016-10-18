@@ -17,6 +17,7 @@ class board {
 		this.gameOver = false; 
 		this.transposed; 
 		this.winningTile = 1028;
+		this.canMoveDir = true; 
 	}
 	clearBoard () {  
 		this.board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
@@ -35,22 +36,35 @@ class board {
 	}
 
 	fillRandomEmptySpace() {
-		console.log("WOO")
 		var emptySpots = this.getEmptySpots();
-		//var random = Math.floor(Math.random() * emptySpots.length-1);
 		var random = Math.round(Math.random() * ((emptySpots.length-1) - 0) + 0);
 		if (emptySpots.length) {
 			var coords = emptySpots[random];
 			this.board[coords[0]][coords[1]] = twoOrFour();
 		}
-		
 	}
-
+	//only for humans
+	makeMove (orientation, direction, option) {
+		let copy = clone(this.board);
+		let cloned = new board();
+		let transposed = false;
+		if (orientation !== this.lastOrientation) {
+			transposed = true;
+		}
+		cloned.board = copy;
+		cloned.update(orientation, direction, option);
+		if (transposed) {
+			cloned.board = transpose(cloned.board);
+		}
+		console.log(">>>>",JSON.stringify(cloned.board) == JSON.stringify(this.board));
+		if (JSON.stringify(cloned.board) != JSON.stringify(this.board)) {
+			this.fillRandomEmptySpace();
+		}
+	}
 	//(string, string) //o(n*n + n*n)if we transpose //else o(n*n)
 	update (orientation, direction, option) { 
 		// const lastBoard = clone(this.board);
 		//if direction is diff transpose
-		
 		if (orientation !== this.lastOrientation) {
 			this.board = transpose(this.board);
 		}
@@ -60,6 +74,7 @@ class board {
 		this.lastOrientation = orientation;//reset orientation to avoid having transpose as often 
 		if (option) console.log(option)
 		this.lastDirection = direction;
+
 	}
 	highestTile () {
 		let all = getFlatArr(this.board);
@@ -72,9 +87,7 @@ class board {
 	}
  	//rewrite after stackathon 
 	hasLost () {
-
 		let copy = clone(this.board);
-
 		let right = new board();
 		right.board = copy;
 		right.update("horizontal", "right");

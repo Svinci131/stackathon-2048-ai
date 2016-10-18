@@ -64,7 +64,6 @@ function render (gameBoard) {
 }
 //doesn't end right on win 
 function makeBestMove(aiGame, game) {
-	console.log("2. ai Move");
 	let bestMove = aiGame.alphaBeta(aiGame.head, 5, -Infinity, Infinity, true);
 	let orientation = bestMove.boardObj.lastOrientation;
 	let direction = bestMove.boardObj.lastDirection;
@@ -135,7 +134,8 @@ $("body").keydown(e => {
 			humanGame.update ("vertical", "down");
 			render(humanGame);
 		}
-		humanGame.fillRandomEmptySpace();
+		
+		
 		render(humanGame);
 		humanGame.hasWon();
 		humanGame.hasLost();
